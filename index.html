@@ -313,10 +313,16 @@
         
           
             <p>py2exe是一个方便的工具，可以将Python程序转化为可以再Windows上直接运行的exe文件，适用于将Python程序分享给没有安装Python解释器用户。下面由我带大家了解一下py2exe的使用。</p>
+<h2 id="3-26日更新：推荐使用pyinstaller！！！"><a href="#3-26日更新：推荐使用pyinstaller！！！" class="headerlink" title="3.26日更新：推荐使用pyinstaller！！！"></a>3.26日更新：推荐使用pyinstaller！！！</h2><p>这两天笔者又发现了另一个python包，叫做pyinstaller，真的超好用。</p>
+<p>安装：<code>pip install pyinstaller</code></p>
+<p>使用：<code>pyinstaller --onefile main.py</code></p>
+<p>众所周知，py2exe打包的程序需要带着<code>dist</code>文件夹一起执行，而pyinstaller直接提供了<code>--onefile</code>这一选项！打包后，<code>dist</code>文件夹里的exe可以单独使用，其余的文件可以直接删除！</p>
+<p>而且，pyinstaller不需要编写<code>setup.py</code>，只需1个命令就可以搞定。</p>
+<p>它的缺点是不能打包更复杂的程序，比如我曾经写的外星人游戏。但是新手时期的控制台程序完全可以用它搞定。</p>
 <h2 id="一、-安装py2exe"><a href="#一、-安装py2exe" class="headerlink" title="一、 安装py2exe"></a>一、 安装py2exe</h2><ol>
 <li>使用Win+R快捷键打开运行窗口，输入cmd，回车。</li>
 </ol>
-<p><img src="https://files.catbox.moe/hplmll.png" alt="image-20230325143417881"></p>
+<p><img src="https://i.postimg.cc/R0k6XV5w/image.png" alt="image-20230325143417881"></p>
 <ol start="2">
 <li><p>检查Python和pip版本（版本可能与我的不同，只要不报错就可以）</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\yixun&gt;python --version</span><br><span class="line">Python 3.10.5</span><br><span class="line"></span><br><span class="line">C:\Users\yixun&gt;pip --version</span><br><span class="line">pip 22.0.4 from C:\Users\yixun\AppData\Local\Programs\Python\Python310\lib\site-packages\pip (python 3.10)</span><br></pre></td></tr></table></figure>
@@ -326,7 +332,7 @@
 </ol>
 <h2 id="二、使用py2exe"><a href="#二、使用py2exe" class="headerlink" title="二、使用py2exe"></a>二、使用py2exe</h2><ol>
 <li><p>首先将cmd切换到你的文件夹里，比如<code>cd C:\Users\yixun\Desktop\Code</code>。安装了Windows终端的读者也可以在文件夹里右击，然后这样：</p>
-<p><img src="https://files.catbox.moe/y7jqe6.png" alt="image-20230325144404474"></p>
+<p><img src="https://i.postimg.cc/kM8FrzTn/image.png" alt="image-20230325144404474"></p>
 </li>
 <li><p>创建一个测试用的Python程序，比如经典的废话程序“身高计算器”：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&quot;你的身高是：&quot;</span> + <span class="built_in">input</span>(<span class="string">&quot;请输入你的身高：&quot;</span>))</span><br><span class="line"><span class="built_in">input</span>()   <span class="comment">#防止输出太快窗口直接关闭，建议每个要转成exe的程序都添加这一句话</span></span><br></pre></td></tr></table></figure>
@@ -346,7 +352,7 @@
 </li>
 </ol>
 <blockquote>
-<p>如有疑问，请联系<a href="mailto:&#x79;&#105;&#120;&#x75;&#x6e;&#50;&#48;&#49;&#48;&#x40;&#x6f;&#117;&#116;&#108;&#x6f;&#x6f;&#x6b;&#x2e;&#x63;&#111;&#109;">&#x79;&#105;&#120;&#x75;&#x6e;&#50;&#48;&#49;&#48;&#x40;&#x6f;&#117;&#116;&#108;&#x6f;&#x6f;&#x6b;&#x2e;&#x63;&#111;&#109;</a></p>
+<p>如有疑问，请联系<a href="mailto:&#x79;&#x69;&#x78;&#x75;&#110;&#50;&#x30;&#x31;&#x30;&#64;&#x6f;&#x75;&#x74;&#x6c;&#x6f;&#111;&#x6b;&#46;&#x63;&#111;&#109;">&#x79;&#x69;&#x78;&#x75;&#110;&#50;&#x30;&#x31;&#x30;&#64;&#x6f;&#x75;&#x74;&#x6c;&#x6f;&#111;&#x6b;&#46;&#x63;&#111;&#109;</a></p>
 </blockquote>
 <hr>
 <p>The END</p>
