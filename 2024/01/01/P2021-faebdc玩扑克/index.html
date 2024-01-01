@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="python," />
+  <meta name="keywords" content="C++," />
 
 
 
@@ -79,21 +79,18 @@
 
 
 
-<meta name="description" content="py2exe是一个方便的工具，可以将Python程序转化为可以再Windows上直接运行的exe文件，适用于将Python程序分享给没有安装Python解释器用户。下面由我带大家了解一下py2exe的使用。 3.26日更新：推荐使用pyinstaller！！！这两天笔者又发现了另一个python包，叫做pyinstaller，真的超好用。 安装：pip install pyinstaller 使用">
+<meta name="description" content="1. 题目描述 zky 有 $n$ 个扑克牌，编号从 $1$ 到 $n$，zky 把它排成一个序列，每次把最上方的扑克牌放在牌堆底，然后把下一张扑克牌拿出来输出，最终输出的序列恰好是从 $1$ 到 $n$，faebdc 问你原序列是什么，因为 faebdc 神犇早已在 $\mathcal O (1)$ 的时间得出结果，如果你在 1 s 内答不出来，faebdc 会吃了你。对于 $100%$ 的数据">
 <meta property="og:type" content="article">
-<meta property="og:title" content="py2exe使用教程">
-<meta property="og:url" content="http://example.com/2023/03/25/py2exe/index.html">
+<meta property="og:title" content="P2021 faebdc玩扑克">
+<meta property="og:url" content="http://example.com/2024/01/01/P2021-faebdc%E7%8E%A9%E6%89%91%E5%85%8B/index.html">
 <meta property="og:site_name" content="索思乐学">
-<meta property="og:description" content="py2exe是一个方便的工具，可以将Python程序转化为可以再Windows上直接运行的exe文件，适用于将Python程序分享给没有安装Python解释器用户。下面由我带大家了解一下py2exe的使用。 3.26日更新：推荐使用pyinstaller！！！这两天笔者又发现了另一个python包，叫做pyinstaller，真的超好用。 安装：pip install pyinstaller 使用">
+<meta property="og:description" content="1. 题目描述 zky 有 $n$ 个扑克牌，编号从 $1$ 到 $n$，zky 把它排成一个序列，每次把最上方的扑克牌放在牌堆底，然后把下一张扑克牌拿出来输出，最终输出的序列恰好是从 $1$ 到 $n$，faebdc 问你原序列是什么，因为 faebdc 神犇早已在 $\mathcal O (1)$ 的时间得出结果，如果你在 1 s 内答不出来，faebdc 会吃了你。对于 $100%$ 的数据">
 <meta property="og:locale">
-<meta property="og:image" content="https://i.postimg.cc/R0k6XV5w/image.png">
-<meta property="og:image" content="https://i.postimg.cc/kM8FrzTn/image.png">
-<meta property="article:published_time" content="2023-03-25T07:34:00.000Z">
-<meta property="article:modified_time" content="2023-03-26T11:26:17.875Z">
+<meta property="article:published_time" content="2024-01-01T04:28:16.000Z">
+<meta property="article:modified_time" content="2024-01-01T04:29:45.749Z">
 <meta property="article:author" content="Yixun Zhang">
-<meta property="article:tag" content="python">
+<meta property="article:tag" content="C++">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://i.postimg.cc/R0k6XV5w/image.png">
 
 
 
@@ -123,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://example.com/2023/03/25/py2exe/"/>
+  <link rel="canonical" href="http://example.com/2024/01/01/P2021-faebdc玩扑克/"/>
 
 
 
 
 
-  <title>py2exe使用教程 | 索思乐学</title>
+  <title>P2021 faebdc玩扑克 | 索思乐学</title>
   
 
 
@@ -246,7 +243,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/25/py2exe/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/01/01/P2021-faebdc%E7%8E%A9%E6%89%91%E5%85%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -263,7 +260,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">py2exe使用教程</h1>
+          <h1 class="post-title" itemprop="name headline">P2021 faebdc玩扑克</h1>
         
 
         <div class="post-meta">
@@ -275,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-03-25T15:34:00+08:00">
-                2023-03-25
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2024-01-01T12:28:16+08:00">
+                2024-01-01
               </time>
             
 
@@ -313,48 +310,16 @@
       
 
       
-        <p>py2exe是一个方便的工具，可以将Python程序转化为可以再Windows上直接运行的exe文件，适用于将Python程序分享给没有安装Python解释器用户。下面由我带大家了解一下py2exe的使用。</p>
-<h2 id="3-26日更新：推荐使用pyinstaller！！！"><a href="#3-26日更新：推荐使用pyinstaller！！！" class="headerlink" title="3.26日更新：推荐使用pyinstaller！！！"></a>3.26日更新：推荐使用pyinstaller！！！</h2><p>这两天笔者又发现了另一个python包，叫做pyinstaller，真的超好用。</p>
-<p>安装：<code>pip install pyinstaller</code></p>
-<p>使用：<code>pyinstaller --onefile main.py</code></p>
-<p>众所周知，py2exe打包的程序需要带着<code>dist</code>文件夹一起执行，而pyinstaller直接提供了<code>--onefile</code>这一选项！打包后，<code>dist</code>文件夹里的exe可以单独使用，其余的文件可以直接删除！</p>
-<p>而且，pyinstaller不需要编写<code>setup.py</code>，只需1个命令就可以搞定。</p>
-<p>它的缺点是不能打包更复杂的程序，比如我曾经写的外星人游戏。但是新手时期的控制台程序完全可以用它搞定。</p>
-<h2 id="一、-安装py2exe"><a href="#一、-安装py2exe" class="headerlink" title="一、 安装py2exe"></a>一、 安装py2exe</h2><ol>
-<li>使用Win+R快捷键打开运行窗口，输入cmd，回车。</li>
-</ol>
-<p><img src="https://i.postimg.cc/R0k6XV5w/image.png" alt="image-20230325143417881"></p>
-<ol start="2">
-<li><p>检查Python和pip版本（版本可能与我的不同，只要不报错就可以）</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\yixun&gt;python --version</span><br><span class="line">Python 3.10.5</span><br><span class="line"></span><br><span class="line">C:\Users\yixun&gt;pip --version</span><br><span class="line">pip 22.0.4 from C:\Users\yixun\AppData\Local\Programs\Python\Python310\lib\site-packages\pip (python 3.10)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>安装py2exe：<code>pip install py2exe</code></p>
-</li>
-</ol>
-<h2 id="二、使用py2exe"><a href="#二、使用py2exe" class="headerlink" title="二、使用py2exe"></a>二、使用py2exe</h2><ol>
-<li><p>首先将cmd切换到你的文件夹里，比如<code>cd C:\Users\yixun\Desktop\Code</code>。安装了Windows终端的读者也可以在文件夹里右击，然后这样：</p>
-<p><img src="https://i.postimg.cc/kM8FrzTn/image.png" alt="image-20230325144404474"></p>
-</li>
-<li><p>创建一个测试用的Python程序，比如经典的废话程序“身高计算器”：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&quot;你的身高是：&quot;</span> + <span class="built_in">input</span>(<span class="string">&quot;请输入你的身高：&quot;</span>))</span><br><span class="line"><span class="built_in">input</span>()   <span class="comment">#防止输出太快窗口直接关闭，建议每个要转成exe的程序都添加这一句话</span></span><br></pre></td></tr></table></figure>
-
-<p>可以命名为<code>main.py</code></p>
-</li>
-<li><p>接下来，创建一个新的Python程序，可以命名为<code>setup.py</code></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> distutils.core <span class="keyword">import</span> setup</span><br><span class="line"><span class="keyword">import</span> py2exe</span><br><span class="line"></span><br><span class="line">sys.argv.append(<span class="string">&#x27;py2exe&#x27;</span>)</span><br><span class="line">setup(console=[<span class="string">&quot;main.py&quot;</span>]) <span class="comment"># 与你的程序文件名匹配</span></span><br></pre></td></tr></table></figure>
-
-<p>注意，所有命名都不是强制性的，可以随意更改。</p>
-</li>
-<li><p>双击运行<code>setup.py</code></p>
-</li>
-<li><p>这会生成一个名叫<code>dist</code>的子目录，注意如果要把exe分享给别人，dist目录要一起分享。</p>
-</li>
-<li><p>打开dist目录中的main.exe，成功运行，最后按Enter可以退出程序。</p>
-</li>
-</ol>
-<blockquote>
-<p>如有疑问，请联系<a href="mailto:&#x79;&#x69;&#x78;&#x75;&#110;&#50;&#x30;&#x31;&#x30;&#64;&#x6f;&#x75;&#x74;&#x6c;&#x6f;&#111;&#x6b;&#46;&#x63;&#111;&#109;">&#x79;&#x69;&#x78;&#x75;&#110;&#50;&#x30;&#x31;&#x30;&#64;&#x6f;&#x75;&#x74;&#x6c;&#x6f;&#111;&#x6b;&#46;&#x63;&#111;&#109;</a></p>
+        <h2 id="1-题目描述"><a href="#1-题目描述" class="headerlink" title="1. 题目描述"></a>1. 题目描述</h2><blockquote>
+<p>zky 有 $n$ 个扑克牌，编号从 $1$ 到 $n$，zky 把它排成一个序列，每次把最上方的扑克牌放在牌堆底，然后把下一张扑克牌拿出来输出，最终输出的序列恰好是从 $1$ 到 $n$，faebdc 问你原序列是什么，因为 faebdc 神犇早已在 $\mathcal O (1)$ 的时间得出结果，如果你在 1 s 内答不出来，faebdc 会吃了你。<br>对于 $100%$ 的数据，$1 \le n \le {10}^6$。</p>
+<p>原题链接：<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2021">https://www.luogu.com.cn/problem/P2021</a></p>
 </blockquote>
+<h2 id="2-思路"><a href="#2-思路" class="headerlink" title="2. 思路"></a>2. 思路</h2><p>此题的数据范围为$10^6$，所以应该用$O(n)$级别的算法来解决。一开始比较容易想到的是使用数学方法进行推导，但是似乎有点复杂。考虑使用队列进行模拟，队列中储存的是答案在数组中的<strong>下标</strong>，每次输出就将数组中对应下标的答案设为当前应输出的数字（1~n）。这样即可解决问题。</p>
+<p>建立一个数组$C$，表示整个扑克牌序列，一个队列$Q$，用于模拟整个过程，其中每个成员$i$表示第$i$张扑克牌。将$cnt$初始赋值为1。循环直到队列为空，每一次都将队首置于队尾，并取出第二个队首$k$，将$C_k$设为$cnt$，且递增$cnt$。循环结束后顺次输出数组$C$即可。</p>
+<h2 id="3-代码"><a href="#3-代码" class="headerlink" title="3. 代码"></a>3. 代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line"><span class="type">int</span> c[<span class="number">1000005</span>];</span><br><span class="line">queue&lt;<span class="type">int</span>&gt; q;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    cin &gt;&gt; n;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        q.<span class="built_in">push</span>(i);</span><br><span class="line">    <span class="type">int</span> cnt = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (!q.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">        q.<span class="built_in">push</span>(q.<span class="built_in">front</span>());</span><br><span class="line">        q.<span class="built_in">pop</span>();</span><br><span class="line">        c[q.<span class="built_in">front</span>()] = cnt++;</span><br><span class="line">        q.<span class="built_in">pop</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        cout &lt;&lt; c[i] &lt;&lt; <span class="string">&#x27; &#x27;</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="4-复杂度分析"><a href="#4-复杂度分析" class="headerlink" title="4. 复杂度分析"></a>4. 复杂度分析</h2><p>时间复杂度：$O(n)$</p>
+<p>空间复杂度：$O(n)$</p>
 <hr>
 <p>The END</p>
 
@@ -374,7 +339,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/python/" rel="tag"># python</a>
+            <a href="/tags/C/" rel="tag"># C++</a>
           
         </div>
       
@@ -387,8 +352,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2022/11/20/demo/" rel="next" title="Linux配置oh-my-zsh的步骤">
-                <i class="fa fa-chevron-left"></i> Linux配置oh-my-zsh的步骤
+              <a href="/2023/12/29/Hexon%E7%9A%84%E4%BD%BF%E7%94%A8/" rel="next" title="Hexon的使用">
+                <i class="fa fa-chevron-left"></i> Hexon的使用
               </a>
             
           </div>
@@ -396,10 +361,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2023/12/29/Hexon%E7%9A%84%E4%BD%BF%E7%94%A8/" rel="prev" title="Hexon的使用">
-                Hexon的使用 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -522,7 +483,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-26%E6%97%A5%E6%9B%B4%E6%96%B0%EF%BC%9A%E6%8E%A8%E8%8D%90%E4%BD%BF%E7%94%A8pyinstaller%EF%BC%81%EF%BC%81%EF%BC%81"><span class="nav-number">1.</span> <span class="nav-text">3.26日更新：推荐使用pyinstaller！！！</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81-%E5%AE%89%E8%A3%85py2exe"><span class="nav-number">2.</span> <span class="nav-text">一、 安装py2exe</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E4%BD%BF%E7%94%A8py2exe"><span class="nav-number">3.</span> <span class="nav-text">二、使用py2exe</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">1. 题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E6%80%9D%E8%B7%AF"><span class="nav-number">2.</span> <span class="nav-text">2. 思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E4%BB%A3%E7%A0%81"><span class="nav-number">3.</span> <span class="nav-text">3. 代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90"><span class="nav-number">4.</span> <span class="nav-text">4. 复杂度分析</span></a></li></ol></div>
             
 
           </div>
