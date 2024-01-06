@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: zyxjeek.github.io
+  repo: zyxjeek/zyxjeek.github.io
   branch: source # Branch to update (optional; defaults to master)
 
 site_url: https://soth.netlify.app/
