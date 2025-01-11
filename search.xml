@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>Hexon的使用</title>
+    <url>/2023/12/29/Hexon%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
+    <content><![CDATA[<blockquote>
+<p>好久没用Hexo写博客了，笔者准备寒假时更新一波洛谷的题解，但由于用命令行写博客很不方便，于是找到了Hexon这款图形化Hexo博客部署工具（</p>
+</blockquote>
+<h2 id="安装">1. 安装</h2>
+<p>这一步很简单，在确保自己的Hexo安装正确后，执行以下命令即可</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/gethexon/hexon --depth 1</span><br><span class="line"><span class="built_in">cd</span> hexon</span><br><span class="line">pnpm install</span><br><span class="line">pnpm run setup</span><br></pre></td></tr></table></figure>
+<p>此时要输入Hexo博客的路径，并设置用户名、密码。</p>
+<p><img
+src="https://www.freeimg.cn/i/2025/01/11/67825386ef571.webp" /></p>
+<h2 id="启动和使用">2. 启动和使用</h2>
+<p>运行<code>pnpm start</code>,打开<a
+href="http://localhost:5777">服务器</a>,用<strong>输出消息中的</strong>用户名和你设置的密码（不要用你之前设的用户名，有bug）</p>
+<p>进入主页后就可以新建管理文章和页面等等，可以一键部署/清理/生成，还可以在这里写文章，连md编辑器都省了。</p>
+<hr />
+<p>其实笔者也刚刚开始使用这款工具，<del>这条博客是测试用的</del>，后续如果有什么更加有趣的玩法我会随时更新。</p>
+<hr />
+<p>The END</p>
+]]></content>
+      <tags>
+        <tag>计算机工具</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>P2021 faebdc玩扑克</title>
+    <url>/2024/01/01/P2021-faebdc%E7%8E%A9%E6%89%91%E5%85%8B/</url>
+    <content><![CDATA[<h2 id="题目描述">1. 题目描述</h2>
+<blockquote>
+<p>zky 有 <span class="math inline">\(n\)</span> 个扑克牌，编号从 <span
+class="math inline">\(1\)</span> 到 <span
+class="math inline">\(n\)</span>，zky
+把它排成一个序列，每次把最上方的扑克牌放在牌堆底，然后把下一张扑克牌拿出来输出，最终输出的序列恰好是从
+<span class="math inline">\(1\)</span> 到 <span
+class="math inline">\(n\)</span>，faebdc 问你原序列是什么，因为 faebdc
+神犇早已在 <span class="math inline">\(\mathcal O (1)\)</span>
+的时间得出结果，如果你在 1 s 内答不出来，faebdc 会吃了你。 对于 <span
+class="math inline">\(100\%\)</span> 的数据，<span
+class="math inline">\(1 \le n \le {10}^6\)</span>。</p>
+<p>原题链接：<a href="https://www.luogu.com.cn/problem/P2021"
+class="uri">https://www.luogu.com.cn/problem/P2021</a></p>
+</blockquote>
+<h2 id="思路">2. 思路</h2>
+<p>此题的数据范围为 <span
+class="math inline">\(10^6\)</span>，所以应该用 <span
+class="math inline">\(\mathcal O(n)\)</span>
+级别的算法来解决。一开始比较容易想到的是使用数学方法进行推导，但是似乎有点复杂。考虑使用队列进行模拟，队列中储存的是答案在数组中的<strong>下标</strong>，每次输出就将数组中对应下标的答案设为当前应输出的数字（1~n）。这样即可解决问题。</p>
+<p>建立一个数组 <span
+class="math inline">\(C\)</span>，表示整个扑克牌序列，一个队列 <span
+class="math inline">\(Q\)</span>，用于模拟整个过程，其中每个成员 <span
+class="math inline">\(i\)</span> 表示第 <span
+class="math inline">\(i\)</span> 张扑克牌。将 <span
+class="math inline">\(cnt\)</span> 初始赋值为 <span
+class="math inline">\(1\)</span>。循环直到队列为空，每一次都将队首置于队尾，并取出第二个队首
+<span class="math inline">\(k\)</span>，将 <span
+class="math inline">\(C_k\)</span> 设为 <span
+class="math inline">\(cnt\)</span>，且递增 <span
+class="math inline">\(cnt\)</span>。循环结束后顺次输出数组 <span
+class="math inline">\(C\)</span> 即可。</p>
+<h2 id="代码">3. 代码</h2>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line"><span class="type">int</span> c[<span class="number">1000005</span>];</span><br><span class="line">queue&lt;<span class="type">int</span>&gt; q;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    cin &gt;&gt; n;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        q.<span class="built_in">push</span>(i);</span><br><span class="line">    <span class="type">int</span> cnt = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (!q.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">        q.<span class="built_in">push</span>(q.<span class="built_in">front</span>());</span><br><span class="line">        q.<span class="built_in">pop</span>();</span><br><span class="line">        c[q.<span class="built_in">front</span>()] = cnt++;</span><br><span class="line">        q.<span class="built_in">pop</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        cout &lt;&lt; c[i] &lt;&lt; <span class="string">&#x27; &#x27;</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="复杂度分析">4. 复杂度分析</h2>
+<p>时间复杂度：<span class="math inline">\(\mathcal O(n)\)</span></p>
+<p>空间复杂度：<span class="math inline">\(\mathcal O(n)\)</span></p>
+<hr />
+<p>The END</p>
+]]></content>
+      <tags>
+        <tag>OI</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Linux配置oh-my-zsh的步骤</title>
+    <url>/2022/11/20/demo/</url>
+    <content><![CDATA[<h2 id="安装zshoh-my-zsh">1. 安装zsh，oh-my-zsh</h2>
+<ul>
+<li><p>首先安装zsh：<code>sudo apt install zsh</code></p></li>
+<li><p>然后安装oh-my-zsh：<code>sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"</code></p></li>
+</ul>
+<h2 id="安装插件">2. 安装插件</h2>
+<ul>
+<li><p>安装高亮插件：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/.oh-my-zsh/custom/plugins/</span><br><span class="line">git <span class="built_in">clone</span> https://github.com/zsh-users/zsh-syntax-highlighting.git</span><br></pre></td></tr></table></figure></li>
+<li><p>安装主题插件：<code>git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $&#123;ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom&#125;/themes/powerlevel10k</code></p></li>
+<li><p>将设置应用到.zshrc：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">### ................ ###</span></span><br><span class="line">ZSH_THEME=<span class="string">&quot;powerlevel10k/powerlevel10k&quot;</span></span><br><span class="line"><span class="comment">### ................ ###</span></span><br><span class="line">plugins = (git <span class="built_in">sudo</span> zsh-syntax-highlighting)</span><br><span class="line"><span class="comment">### ................ ###</span></span><br><span class="line"><span class="built_in">source</span> ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh</span><br></pre></td></tr></table></figure></li>
+</ul>
+]]></content>
+      <tags>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>py2exe使用教程</title>
+    <url>/2023/03/25/py2exe/</url>
+    <content><![CDATA[<p>py2exe是一个方便的工具，可以将Python程序转化为可以再Windows上直接运行的exe文件，适用于将Python程序分享给没有安装Python解释器用户。下面由我带大家了解一下py2exe的使用。</p>
+<h2
+id="日更新推荐使用pyinstaller">3.26日更新：推荐使用pyinstaller！！！</h2>
+<p>这两天笔者又发现了另一个python包，叫做pyinstaller，真的超好用。</p>
+<p>安装：<code>pip install pyinstaller</code></p>
+<p>使用：<code>pyinstaller --onefile main.py</code></p>
+<p>众所周知，py2exe打包的程序需要带着<code>dist</code>文件夹一起执行，而pyinstaller直接提供了<code>--onefile</code>这一选项！打包后，<code>dist</code>文件夹里的exe可以单独使用，其余的文件可以直接删除！</p>
+<p>而且，pyinstaller不需要编写<code>setup.py</code>，只需1个命令就可以搞定。</p>
+<p>它的缺点是不能打包更复杂的程序，比如我曾经写的外星人游戏。但是新手时期的控制台程序完全可以用它搞定。</p>
+<h2 id="一-安装py2exe">一、 安装py2exe</h2>
+<ol type="1">
+<li>使用Win+R快捷键打开运行窗口，输入cmd，回车。</li>
+</ol>
+<p><img
+src="https://www.freeimg.cn/i/2025/01/11/6782535014509.webp" /></p>
+<ol type="1">
+<li><p>检查Python和pip版本（版本可能与我的不同，只要不报错就可以）</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">C:\Users\yixun&gt;python --version</span><br><span class="line">Python 3.10.5</span><br><span class="line"></span><br><span class="line">C:\Users\yixun&gt;pip --version</span><br><span class="line">pip 22.0.4 from C:\Users\yixun\AppData\Local\Programs\Python\Python310\lib\site-packages\pip (python 3.10)</span><br></pre></td></tr></table></figure></li>
+<li><p>安装py2exe：<code>pip install py2exe</code></p></li>
+</ol>
+<h2 id="二使用py2exe">二、使用py2exe</h2>
+<ol type="1">
+<li><p>首先将cmd切换到你的文件夹里，比如<code>cd C:\Users\yixun\Desktop\Code</code>。安装了Windows终端的读者也可以在文件夹里右击，然后这样：</p>
+<p><img
+src="https://www.freeimg.cn/i/2025/01/11/6782535087359.webp" /></p></li>
+<li><p>创建一个测试用的Python程序，比如经典的废话程序“身高计算器”：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&quot;你的身高是：&quot;</span> + <span class="built_in">input</span>(<span class="string">&quot;请输入你的身高：&quot;</span>))</span><br><span class="line"><span class="built_in">input</span>()   <span class="comment">#防止输出太快窗口直接关闭，建议每个要转成exe的程序都添加这一句话</span></span><br></pre></td></tr></table></figure>
+<p>可以命名为<code>main.py</code></p></li>
+<li><p>接下来，创建一个新的Python程序，可以命名为<code>setup.py</code></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> distutils.core <span class="keyword">import</span> setup</span><br><span class="line"><span class="keyword">import</span> py2exe</span><br><span class="line"></span><br><span class="line">sys.argv.append(<span class="string">&#x27;py2exe&#x27;</span>)</span><br><span class="line">setup(console=[<span class="string">&quot;main.py&quot;</span>]) <span class="comment"># 与你的程序文件名匹配</span></span><br></pre></td></tr></table></figure>
+<p>注意，所有命名都不是强制性的，可以随意更改。</p></li>
+<li><p>双击运行<code>setup.py</code></p></li>
+<li><p>这会生成一个名叫<code>dist</code>的子目录，注意如果要把exe分享给别人，dist目录要一起分享。</p></li>
+<li><p>打开dist目录中的main.exe，成功运行，最后按Enter可以退出程序。</p></li>
+</ol>
+<blockquote>
+<p>如有疑问，请联系yixun2010@outlook.com</p>
+</blockquote>
+<hr />
+<p>The END</p>
+]]></content>
+      <tags>
+        <tag>计算机工具</tag>
+        <tag>python</tag>
+      </tags>
+  </entry>
+</search>
