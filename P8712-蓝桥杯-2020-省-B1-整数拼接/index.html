@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.loli.net/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.22.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="1.题目描述  给定一个长度为 \(n\) 的数组 \(A_1,A_2,\cdots,A_n\)。你可以从中选出两个数 \(A_i\) 和 \(A_j\)（\(i\neq j\)），然后将 \(A_i\) 和 \(A_j\) 一前一后拼成一个新的整数。例如 12 和 345 可以拼成 12345 或 34512。注意交换 \(A_i\) 和 \(A_j\) 的顺序总是被视为 \(2\">
+<meta property="og:type" content="website">
+<meta property="og:title" content="P8712 [蓝桥杯 2020 省 B1] 整数拼接">
+<meta property="og:url" content="http://example.com/P8712-%E8%93%9D%E6%A1%A5%E6%9D%AF-2020-%E7%9C%81-B1-%E6%95%B4%E6%95%B0%E6%8B%BC%E6%8E%A5/index.html">
+<meta property="og:site_name" content="索思乐学">
+<meta property="og:description" content="1.题目描述  给定一个长度为 \(n\) 的数组 \(A_1,A_2,\cdots,A_n\)。你可以从中选出两个数 \(A_i\) 和 \(A_j\)（\(i\neq j\)），然后将 \(A_i\) 和 \(A_j\) 一前一后拼成一个新的整数。例如 12 和 345 可以拼成 12345 或 34512。注意交换 \(A_i\) 和 \(A_j\) 的顺序总是被视为 \(2\">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-01-13T13:18:34.809Z">
+<meta property="article:modified_time" content="2025-01-13T13:18:34.809Z">
+<meta property="article:author" content="Yixun Zhang">
+<meta property="article:tag" content="OI">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/P8712-%E8%93%9D%E6%A1%A5%E6%9D%AF-2020-%E7%9C%81-B1-%E6%95%B4%E6%95%B0%E6%8B%BC%E6%8E%A5/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"zh-CN","comments":true,"permalink":"http://example.com/P8712-%E8%93%9D%E6%A1%A5%E6%9D%AF-2020-%E7%9C%81-B1-%E6%95%B4%E6%95%B0%E6%8B%BC%E6%8E%A5/index.html","path":"P8712-蓝桥杯-2020-省-B1-整数拼接/index.html","title":"P8712 [蓝桥杯 2020 省 B1] 整数拼接"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>P8712 [蓝桥杯 2020 省 B1] 整数拼接 | 索思乐学
+</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">索思乐学</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">zyxjeek的博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">1.题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF"><span class="nav-number">2.</span> <span class="nav-text">2.思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">3.</span> <span class="nav-text">3.注意事项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81"><span class="nav-number">4.</span> <span class="nav-text">4.代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90"><span class="nav-number">5.</span> <span class="nav-text">5.复杂度分析</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Yixun Zhang</p>
+  <div class="site-description" itemprop="description">编程技术分享</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner page posts-expand">
+
+
+    
+    
+    
+    <div class="post-block" lang="zh-CN"><header class="post-header">
+
+<h1 class="post-title" itemprop="name headline">P8712 [蓝桥杯 2020 省 B1] 整数拼接
+</h1>
+
+<div class="post-meta-container">
+</div>
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+          <h2 id="题目描述">1.题目描述</h2>
+<blockquote>
+<p>给定一个长度为 <span class="math inline">\(n\)</span> 的数组 <span
+class="math inline">\(A_1,A_2,\cdots,A_n\)</span>。你可以从中选出两个数
+<span class="math inline">\(A_i\)</span> 和 <span
+class="math inline">\(A_j\)</span>（<span class="math inline">\(i\neq
+j\)</span>），然后将 <span class="math inline">\(A_i\)</span> 和 <span
+class="math inline">\(A_j\)</span> 一前一后拼成一个新的整数。例如
+<code>12</code> 和 <code>345</code> 可以拼成 <code>12345</code> 或
+<code>34512</code>。注意交换 <span class="math inline">\(A_i\)</span> 和
+<span class="math inline">\(A_j\)</span> 的顺序总是被视为 <span
+class="math inline">\(2\)</span> 种拼法，即便是 <span
+class="math inline">\(A_i=A_j\)</span> 时。</p>
+<p>请你计算有多少种拼法满足拼出的整数是 <span
+class="math inline">\(K\)</span> 的倍数。</p>
+</blockquote>
+<h2 id="思路">2.思路</h2>
+<p>由于 <span class="math inline">\(1 \le n \le
+10^5\)</span>，使用时间复杂度为 <span class="math inline">\(\mathcal
+O(n^2)\)</span>
+的算法枚举每种拼接显然不可行。面对这个问题，我们需要一种储存数组 <span
+class="math inline">\(A\)</span> 中信息的方法，可以让我们在每次遍历
+<span class="math inline">\(A_i\)</span> 时以较少的时间复杂度得知能与
+<span class="math inline">\(A_i\)</span> 拼接的整数个数。</p>
+<p>设数组中两个元素 <span class="math inline">\(A_j\)</span> 和 <span
+class="math inline">\(A_i\)</span> 的数字位数分别为 <span
+class="math inline">\(v\)</span> 和 <span
+class="math inline">\(u\)</span>，因为拼接后的数是 <span
+class="math inline">\(K\)</span> 的倍数，所以有 <span
+class="math inline">\(A_j \cdot 10^u + A_i \equiv 0 \pmod K\)</span>，即
+<span class="math inline">\(A_j \cdot 10^u \equiv -A_i \pmod
+K\)</span>。由于 <span class="math inline">\(A_i \le 10^9\)</span>，即
+<span class="math inline">\(A_i\)</span> 最多有十位，我们可以开 <span
+class="math inline">\(10\)</span> 个哈希表，对于第 <span
+class="math inline">\(p\)</span> 个哈希表，存储 <span
+class="math inline">\(A_i \cdot 10^u \mod K\)</span>
+的每个值出现的次数。这样我们在遍历时就能用哈希表里的值进行快速相加了。</p>
+<h2 id="注意事项">3.注意事项</h2>
+<ul>
+<li><p>由于 <span class="math inline">\(K \le
+10^5\)</span>，我们把两个模 <span class="math inline">\(K\)</span>
+的余数相乘时会超出<code>int</code>的范围。此外拼接方法的总数在极限情况下也会超出<code>int</code>的范围。所以记得开<code>long long</code>。</p></li>
+<li><p>按以上方法计算会多算到自己与自己拼接的情况。所以当 <span
+class="math inline">\(A_i \cdot 10^u + A_i \equiv 0 \pmod K\)</span>
+时，要把答案减 <span class="math inline">\(1\)</span>。</p></li>
+<li><p>可以用<code>log10(x) + 1</code>快速计算 <span
+class="math inline">\(x\)</span> 的数字位数。</p></li>
+</ul>
+<h2 id="代码">4.代码</h2>
+<p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">1e5</span>+<span class="number">5</span>;</span><br><span class="line"><span class="type">int</span> n, k, a[N];</span><br><span class="line"><span class="type">long</span> <span class="type">long</span> pw[<span class="number">11</span>]; <span class="comment">// 10^u % k</span></span><br><span class="line">unordered_map&lt;<span class="type">int</span>, <span class="type">int</span>&gt; mp[<span class="number">11</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">    cin.<span class="built_in">tie</span>(<span class="literal">nullptr</span>);</span><br><span class="line"></span><br><span class="line">    cin &gt;&gt; n &gt;&gt; k;</span><br><span class="line">    pw[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">10</span>; i++)</span><br><span class="line">        pw[i] = (pw[i<span class="number">-1</span>] * <span class="number">10</span>) % k;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        cin &gt;&gt; a[i];</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt;= <span class="number">10</span>; j++)</span><br><span class="line">            mp[j][a[i] * pw[j] % k]++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="type">int</span> len = <span class="built_in">log10</span>(a[i]) + <span class="number">1</span>, mod = (k - a[i] % k) % k; <span class="comment">// mod等价于数学上的-a[i] mod k</span></span><br><span class="line">        ans += mp[len][mod];</span><br><span class="line">        <span class="keyword">if</span> (a[i] * pw[len] % k == mod)</span><br><span class="line">            ans--;</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; ans &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="复杂度分析">5.复杂度分析</h2>
+<p>时间复杂度：<span class="math inline">\(\mathcal O(n \log_{10} \max
+A_i)\)</span></p>
+<hr />
+<p>The End</p>
+
+      </div>
+      
+      
+      
+    </div>
+
+    
+    
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Yixun Zhang</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
