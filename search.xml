@@ -160,6 +160,8 @@ class="math inline">\(2\)</span> 种拼法，即便是 <span
 class="math inline">\(A_i=A_j\)</span> 时。</p>
 <p>请你计算有多少种拼法满足拼出的整数是 <span
 class="math inline">\(K\)</span> 的倍数。</p>
+<p>原题链接：<a href="https://www.luogu.com.cn/problem/P8712"
+class="uri">https://www.luogu.com.cn/problem/P8712</a></p>
 </blockquote>
 <h2 id="思路">2.思路</h2>
 <p>由于 <span class="math inline">\(1 \le n \le
