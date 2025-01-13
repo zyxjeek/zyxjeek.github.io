@@ -20,27 +20,25 @@
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.22.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
     <meta name="description" content="1.题目描述  给定一个长度为 \(n\) 的数组 \(A_1,A_2,\cdots,A_n\)。你可以从中选出两个数 \(A_i\) 和 \(A_j\)（\(i\neq j\)），然后将 \(A_i\) 和 \(A_j\) 一前一后拼成一个新的整数。例如 12 和 345 可以拼成 12345 或 34512。注意交换 \(A_i\) 和 \(A_j\) 的顺序总是被视为 \(2\">
-<meta property="og:type" content="website">
+<meta property="og:type" content="article">
 <meta property="og:title" content="P8712 [蓝桥杯 2020 省 B1] 整数拼接">
-<meta property="og:url" content="http://example.com/P8712-%E8%93%9D%E6%A1%A5%E6%9D%AF-2020-%E7%9C%81-B1-%E6%95%B4%E6%95%B0%E6%8B%BC%E6%8E%A5/index.html">
+<meta property="og:url" content="http://example.com/2025/01/13/P8712-%E8%93%9D%E6%A1%A5%E6%9D%AF-2020-%E7%9C%81-B1-%E6%95%B4%E6%95%B0%E6%8B%BC%E6%8E%A5/index.html">
 <meta property="og:site_name" content="索思乐学">
 <meta property="og:description" content="1.题目描述  给定一个长度为 \(n\) 的数组 \(A_1,A_2,\cdots,A_n\)。你可以从中选出两个数 \(A_i\) 和 \(A_j\)（\(i\neq j\)），然后将 \(A_i\) 和 \(A_j\) 一前一后拼成一个新的整数。例如 12 和 345 可以拼成 12345 或 34512。注意交换 \(A_i\) 和 \(A_j\) 的顺序总是被视为 \(2\">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2025-01-13T13:18:34.809Z">
-<meta property="article:modified_time" content="2025-01-13T13:18:34.809Z">
+<meta property="article:published_time" content="2025-01-13T13:21:56.068Z">
+<meta property="article:modified_time" content="2025-01-13T13:22:12.457Z">
 <meta property="article:author" content="Yixun Zhang">
-<meta property="article:tag" content="OI">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://example.com/P8712-%E8%93%9D%E6%A1%A5%E6%9D%AF-2020-%E7%9C%81-B1-%E6%95%B4%E6%95%B0%E6%8B%BC%E6%8E%A5/">
+<link rel="canonical" href="http://example.com/2025/01/13/P8712-%E8%93%9D%E6%A1%A5%E6%9D%AF-2020-%E7%9C%81-B1-%E6%95%B4%E6%95%B0%E6%8B%BC%E6%8E%A5/">
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"zh-CN","comments":true,"permalink":"http://example.com/P8712-%E8%93%9D%E6%A1%A5%E6%9D%AF-2020-%E7%9C%81-B1-%E6%95%B4%E6%95%B0%E6%8B%BC%E6%8E%A5/index.html","path":"P8712-蓝桥杯-2020-省-B1-整数拼接/index.html","title":"P8712 [蓝桥杯 2020 省 B1] 整数拼接"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2025/01/13/P8712-%E8%93%9D%E6%A1%A5%E6%9D%AF-2020-%E7%9C%81-B1-%E6%95%B4%E6%95%B0%E6%8B%BC%E6%8E%A5/","path":"2025/01/13/P8712-蓝桥杯-2020-省-B1-整数拼接/","title":"P8712 [蓝桥杯 2020 省 B1] 整数拼接"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>P8712 [蓝桥杯 2020 省 B1] 整数拼接 | 索思乐学
-</title>
+<title>P8712 [蓝桥杯 2020 省 B1] 整数拼接 | 索思乐学</title>
   
 
 
@@ -153,7 +151,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-count">5</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -175,27 +173,67 @@
 
     </div>
 
-    <div class="main-inner page posts-expand">
+    <div class="main-inner post posts-expand">
 
 
-    
-    
-    
-    <div class="post-block" lang="zh-CN"><header class="post-header">
+  
 
-<h1 class="post-title" itemprop="name headline">P8712 [蓝桥杯 2020 省 B1] 整数拼接
-</h1>
 
-<div class="post-meta-container">
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/01/13/P8712-%E8%93%9D%E6%A1%A5%E6%9D%AF-2020-%E7%9C%81-B1-%E6%95%B4%E6%95%B0%E6%8B%BC%E6%8E%A5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yixun Zhang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="索思乐学">
+      <meta itemprop="description" content="编程技术分享">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="P8712 [蓝桥杯 2020 省 B1] 整数拼接 | 索思乐学">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          P8712 [蓝桥杯 2020 省 B1] 整数拼接
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2025-01-13 21:21:56 / 修改时间：21:22:12" itemprop="dateCreated datePublished" datetime="2025-01-13T21:21:56+08:00">2025-01-13</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
 </div>
 
-</header>
+        </div>
+      </header>
 
-      
-      
-      
-      <div class="post-body">
-          <h2 id="题目描述">1.题目描述</h2>
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="题目描述">1.题目描述</h2>
 <blockquote>
 <p>给定一个长度为 <span class="math inline">\(n\)</span> 的数组 <span
 class="math inline">\(A_1,A_2,\cdots,A_n\)</span>。你可以从中选出两个数
@@ -251,14 +289,32 @@ A_i)\)</span></p>
 <hr />
 <p>The End</p>
 
-      </div>
-      
-      
-      
     </div>
 
     
     
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/01/01/P2021-faebdc%E7%8E%A9%E6%89%91%E5%85%8B/" rel="prev" title="P2021 faebdc玩扑克">
+                  <i class="fa fa-angle-left"></i> P2021 faebdc玩扑克
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
 
 
 </div>
