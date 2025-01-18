@@ -268,4 +268,41 @@ class="math inline">\(s\)</span> 中最长回文串的长度。</p>
         <tag>OI</tag>
       </tags>
   </entry>
+  <entry>
+    <title>P11577 [CCC2020] Epidemiology</title>
+    <url>/2025/01/18/P11577-CCC2020-Epidemiology/</url>
+    <content><![CDATA[<h2 id="题目描述">1.题目描述</h2>
+<p>有 <span class="math inline">\(N\)</span> 个人在第 <span
+class="math inline">\(0\)</span> 天患病。当一个人患病时，他会在明天感染
+<span class="math inline">\(R\)</span>
+个人，随后便不再感染他人。没有一个人会被感染超过一次。我们想要确定造成
+<span class="math inline">\(P+1\)</span> 个人患病的最早时间。</p>
+<h2 id="思路">2.思路</h2>
+<p>简单模拟即可。我们用变量 <span class="math inline">\(d_i\)</span>
+记录第 <span class="math inline">\(i\)</span>
+新增的患病人数，由于每人能感染 <span class="math inline">\(r\)</span>
+人，所以 <span class="math inline">\(d_i = d_{i-1} \times
+R\)</span>。不断让 <span class="math inline">\(N\)</span> 加上 <span
+class="math inline">\(d_i\)</span>，直到 <span class="math inline">\(N
+&gt; P\)</span>。此时的天数 <span class="math inline">\(i\)</span>
+就是答案。</p>
+<h2 id="注意事项">3.注意事项</h2>
+<ul>
+<li>退出循环时，<span class="math inline">\(i\)</span> 的值是感染 <span
+class="math inline">\(P\)</span> 个人后的第二天。所以答案是 <span
+class="math inline">\(i-1\)</span>。</li>
+</ul>
+<h2 id="代码">4.代码</h2>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">    cin.<span class="built_in">tie</span>(<span class="literal">nullptr</span>);</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> p, n, r;</span><br><span class="line">    cin &gt;&gt; p &gt;&gt; n &gt;&gt; r;</span><br><span class="line">    <span class="type">int</span> d = n, i;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">1</span>; n &lt;= p; i++) &#123;</span><br><span class="line">        d *= r;</span><br><span class="line">        n += d;</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; i<span class="number">-1</span> &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="时间复杂度">5.时间复杂度</h2>
+<p>循环变量 <span class="math inline">\(d\)</span> 在每次循环中都会乘上
+<span class="math inline">\(R\)</span>，所以时间复杂度是 <span
+class="math inline">\(\mathcal O(\log_R P)\)</span>。</p>
+<hr />
+<p>The End</p>
+]]></content>
+      <tags>
+        <tag>OI</tag>
+      </tags>
+  </entry>
 </search>

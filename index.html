@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width">
-<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
@@ -148,7 +148,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-count">8</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -171,6 +171,104 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/01/18/P11577-CCC2020-Epidemiology/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yixun Zhang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="索思乐学">
+      <meta itemprop="description" content="编程技术分享">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 索思乐学">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/01/18/P11577-CCC2020-Epidemiology/" class="post-title-link" itemprop="url">P11577 [CCC2020] Epidemiology</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2025-01-18 09:17:03 / 修改时间：09:17:26" itemprop="dateCreated datePublished" datetime="2025-01-18T09:17:03+08:00">2025-01-18</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="题目描述">1.题目描述</h2>
+<p>有 <span class="math inline">\(N\)</span> 个人在第 <span
+class="math inline">\(0\)</span> 天患病。当一个人患病时，他会在明天感染
+<span class="math inline">\(R\)</span>
+个人，随后便不再感染他人。没有一个人会被感染超过一次。我们想要确定造成
+<span class="math inline">\(P+1\)</span> 个人患病的最早时间。</p>
+<h2 id="思路">2.思路</h2>
+<p>简单模拟即可。我们用变量 <span class="math inline">\(d_i\)</span>
+记录第 <span class="math inline">\(i\)</span>
+新增的患病人数，由于每人能感染 <span class="math inline">\(r\)</span>
+人，所以 <span class="math inline">\(d_i = d_{i-1} \times
+R\)</span>。不断让 <span class="math inline">\(N\)</span> 加上 <span
+class="math inline">\(d_i\)</span>，直到 <span class="math inline">\(N
+&gt; P\)</span>。此时的天数 <span class="math inline">\(i\)</span>
+就是答案。</p>
+<h2 id="注意事项">3.注意事项</h2>
+<ul>
+<li>退出循环时，<span class="math inline">\(i\)</span> 的值是感染 <span
+class="math inline">\(P\)</span> 个人后的第二天。所以答案是 <span
+class="math inline">\(i-1\)</span>。</li>
+</ul>
+<h2 id="代码">4.代码</h2>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">    cin.<span class="built_in">tie</span>(<span class="literal">nullptr</span>);</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> p, n, r;</span><br><span class="line">    cin &gt;&gt; p &gt;&gt; n &gt;&gt; r;</span><br><span class="line">    <span class="type">int</span> d = n, i;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">1</span>; n &lt;= p; i++) &#123;</span><br><span class="line">        d *= r;</span><br><span class="line">        n += d;</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; i<span class="number">-1</span> &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="时间复杂度">5.时间复杂度</h2>
+<p>循环变量 <span class="math inline">\(d\)</span> 在每次循环中都会乘上
+<span class="math inline">\(R\)</span>，所以时间复杂度是 <span
+class="math inline">\(\mathcal O(\log_R P)\)</span>。</p>
+<hr />
+<p>The End</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
