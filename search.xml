@@ -63,6 +63,56 @@ class="math inline">\(\mathcal O(\log_R P)\)</span>。</p>
       </tags>
   </entry>
   <entry>
+    <title>LibreOJ #6439. Popcount Xor</title>
+    <url>/2025/08/10/LibreOJ-6439-Popcount-Xor/</url>
+    <content><![CDATA[<h2 id="题目描述">1. 题目描述</h2>
+<p>给定正整数 <span
+class="math inline">\(n\)</span>，用<strong>二进制整数</strong>表示，求
+<span class="math inline">\(\bigoplus_{i=0}^{n-1}
+\operatorname{popcount}(i)\)</span>。保证 <span class="math inline">\(1
+\le n \le 2^{3\times10^5}\)</span>。</p>
+<h2 id="思路">2. 思路</h2>
+<p>令 <span class="math inline">\(s\)</span> 为输入的字符串，下标从
+<span class="math inline">\(0\)</span> 开始。枚举每个 <span
+class="math inline">\(s_i = 1\)</span> 的 <span
+class="math inline">\(i\)</span>，考虑第 <span class="math inline">\(0
+\sim i-1\)</span> 位已确定，第 <span class="math inline">\(i\)</span>
+位为 <span class="math inline">\(0\)</span> 时对答案的贡献 <span
+class="math inline">\(c\)</span>。则： <span class="math display">\[
+c = \bigoplus_{j=0}^{|s|-i+1} (cnt_{i-1}+j)\binom{|s|-i+1}{j} \bmod 2
+\]</span> 其中 <span class="math inline">\(cnt_i\)</span> 表示从 <span
+class="math inline">\(s_0\)</span> 到 <span
+class="math inline">\(s_i\)</span> 中 <span
+class="math inline">\(1\)</span> 的数量。<span
+class="math inline">\(\binom{|s|-i+1}{j}\)</span> 是从后面的 <span
+class="math inline">\(|s|-i+1\)</span> 位中选 <span
+class="math inline">\(j\)</span> 位的方案数。模 <span
+class="math inline">\(2\)</span> 是因为同一个数异或自己偶数次结果为
+<span class="math inline">\(0\)</span>。</p>
+<p>由Lucas定理，<span class="math inline">\(\binom{n}{m} \bmod 2 =
+\binom{n\bmod2}{m\bmod2}
+\binom{\lfloor\frac{n}{2}\rfloor}{\lfloor\frac{m}{2}\rfloor} \bmod
+2\)</span>，不断将 <span class="math inline">\(n, m\)</span>
+一起右移一位，可得 <span class="math inline">\(\binom{n}{m} \bmod 2 =
+\prod_i \binom{n&gt;&gt;i \&amp; 1}{m &gt;&gt; i \&amp;
+1}\)</span>。</p>
+<p>又由于 <span
+class="math inline">\(\binom{1}{1}=\binom{1}{0}=\binom{0}{0} =
+1,\binom{0}{1} = 0\)</span>，我们发现： <span class="math display">\[
+\binom n m \bmod 2 = [n \&amp; m = m]
+\]</span> 所以： <span class="math display">\[
+c = \bigoplus_{j=0}^{|s|-i+1} (cnt_{i-1}+j)[(|s|-i+1) \&amp; j = j]
+\]</span> 算这个式子的复杂度可以接受。</p>
+<h2 id="代码">3. 代码</h2>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    string s;</span><br><span class="line">    cin &gt;&gt; s;</span><br><span class="line">    <span class="type">int</span> n = s.<span class="built_in">size</span>(), cnt = <span class="number">0</span>, ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (s[i] == <span class="string">&#x27;0&#x27;</span>) <span class="keyword">continue</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = n-i<span class="number">-1</span>; ; j = (j<span class="number">-1</span>)&amp;(n-i<span class="number">-1</span>)) &#123;</span><br><span class="line">            ans ^= (cnt+j);</span><br><span class="line">            <span class="keyword">if</span> (!j) <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        cnt++;</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; ans &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr />
+<p>The End</p>
+]]></content>
+      <tags>
+        <tag>OI</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>P2021 faebdc玩扑克</title>
     <url>/2024/01/01/P2021-faebdc%E7%8E%A9%E6%89%91%E5%85%8B/</url>
     <content><![CDATA[<h2 id="题目描述">1. 题目描述</h2>
@@ -171,76 +221,6 @@ class="math inline">\(0.010000\)</span>，不能直接使用<code>cout.precision
       </tags>
   </entry>
   <entry>
-    <title>Linux配置oh-my-zsh的步骤</title>
-    <url>/2022/11/20/demo/</url>
-    <content><![CDATA[<h2 id="安装zshoh-my-zsh">1. 安装zsh，oh-my-zsh</h2>
-<ul>
-<li><p>首先安装zsh：<code>sudo apt install zsh</code></p></li>
-<li><p>然后安装oh-my-zsh：<code>sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"</code></p></li>
-</ul>
-<h2 id="安装插件">2. 安装插件</h2>
-<ul>
-<li><p>安装高亮插件：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/.oh-my-zsh/custom/plugins/</span><br><span class="line">git <span class="built_in">clone</span> https://github.com/zsh-users/zsh-syntax-highlighting.git</span><br></pre></td></tr></table></figure></li>
-<li><p>安装主题插件：<code>git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $&#123;ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom&#125;/themes/powerlevel10k</code></p></li>
-<li><p>将设置应用到.zshrc：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">### ................ ###</span></span><br><span class="line">ZSH_THEME=<span class="string">&quot;powerlevel10k/powerlevel10k&quot;</span></span><br><span class="line"><span class="comment">### ................ ###</span></span><br><span class="line">plugins = (git <span class="built_in">sudo</span> zsh-syntax-highlighting)</span><br><span class="line"><span class="comment">### ................ ###</span></span><br><span class="line"><span class="built_in">source</span> ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh</span><br></pre></td></tr></table></figure></li>
-</ul>
-]]></content>
-      <tags>
-        <tag>Linux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>py2exe使用教程</title>
-    <url>/2023/03/25/py2exe/</url>
-    <content><![CDATA[<p>py2exe是一个方便的工具，可以将Python程序转化为可以再Windows上直接运行的exe文件，适用于将Python程序分享给没有安装Python解释器用户。下面由我带大家了解一下py2exe的使用。</p>
-<h2
-id="日更新推荐使用pyinstaller">3.26日更新：推荐使用pyinstaller！！！</h2>
-<p>这两天笔者又发现了另一个python包，叫做pyinstaller，真的超好用。</p>
-<p>安装：<code>pip install pyinstaller</code></p>
-<p>使用：<code>pyinstaller --onefile main.py</code></p>
-<p>众所周知，py2exe打包的程序需要带着<code>dist</code>文件夹一起执行，而pyinstaller直接提供了<code>--onefile</code>这一选项！打包后，<code>dist</code>文件夹里的exe可以单独使用，其余的文件可以直接删除！</p>
-<p>而且，pyinstaller不需要编写<code>setup.py</code>，只需1个命令就可以搞定。</p>
-<p>它的缺点是不能打包更复杂的程序，比如我曾经写的外星人游戏。但是新手时期的控制台程序完全可以用它搞定。</p>
-<h2 id="一-安装py2exe">一、 安装py2exe</h2>
-<ol type="1">
-<li>使用Win+R快捷键打开运行窗口，输入cmd，回车。</li>
-</ol>
-<p><img
-src="https://www.freeimg.cn/i/2025/01/11/6782535014509.webp" /></p>
-<ol type="1">
-<li><p>检查Python和pip版本（版本可能与我的不同，只要不报错就可以）</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">C:\Users\yixun&gt;python --version</span><br><span class="line">Python 3.10.5</span><br><span class="line"></span><br><span class="line">C:\Users\yixun&gt;pip --version</span><br><span class="line">pip 22.0.4 from C:\Users\yixun\AppData\Local\Programs\Python\Python310\lib\site-packages\pip (python 3.10)</span><br></pre></td></tr></table></figure></li>
-<li><p>安装py2exe：<code>pip install py2exe</code></p></li>
-</ol>
-<h2 id="二使用py2exe">二、使用py2exe</h2>
-<ol type="1">
-<li><p>首先将cmd切换到你的文件夹里，比如<code>cd C:\Users\yixun\Desktop\Code</code>。安装了Windows终端的读者也可以在文件夹里右击，然后这样：</p>
-<p><img
-src="https://www.freeimg.cn/i/2025/01/11/6782535087359.webp" /></p></li>
-<li><p>创建一个测试用的Python程序，比如经典的废话程序“身高计算器”：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&quot;你的身高是：&quot;</span> + <span class="built_in">input</span>(<span class="string">&quot;请输入你的身高：&quot;</span>))</span><br><span class="line"><span class="built_in">input</span>()   <span class="comment">#防止输出太快窗口直接关闭，建议每个要转成exe的程序都添加这一句话</span></span><br></pre></td></tr></table></figure>
-<p>可以命名为<code>main.py</code></p></li>
-<li><p>接下来，创建一个新的Python程序，可以命名为<code>setup.py</code></p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> distutils.core <span class="keyword">import</span> setup</span><br><span class="line"><span class="keyword">import</span> py2exe</span><br><span class="line"></span><br><span class="line">sys.argv.append(<span class="string">&#x27;py2exe&#x27;</span>)</span><br><span class="line">setup(console=[<span class="string">&quot;main.py&quot;</span>]) <span class="comment"># 与你的程序文件名匹配</span></span><br></pre></td></tr></table></figure>
-<p>注意，所有命名都不是强制性的，可以随意更改。</p></li>
-<li><p>双击运行<code>setup.py</code></p></li>
-<li><p>这会生成一个名叫<code>dist</code>的子目录，注意如果要把exe分享给别人，dist目录要一起分享。</p></li>
-<li><p>打开dist目录中的main.exe，成功运行，最后按Enter可以退出程序。</p></li>
-</ol>
-<blockquote>
-<p>如有疑问，请联系yixun2010@outlook.com</p>
-</blockquote>
-<hr />
-<p>The END</p>
-]]></content>
-      <tags>
-        <tag>计算机工具</tag>
-        <tag>python</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>P8712 [蓝桥杯 2020 省 B1] 整数拼接</title>
     <url>/2025/01/13/P8712-%E8%93%9D%E6%A1%A5%E6%9D%AF-2020-%E7%9C%81-B1-%E6%95%B4%E6%95%B0%E6%8B%BC%E6%8E%A5/</url>
     <content><![CDATA[<h2 id="题目描述">1.题目描述</h2>
@@ -306,6 +286,76 @@ A_i)\)</span></p>
       </tags>
   </entry>
   <entry>
+    <title>py2exe使用教程</title>
+    <url>/2023/03/25/py2exe/</url>
+    <content><![CDATA[<p>py2exe是一个方便的工具，可以将Python程序转化为可以再Windows上直接运行的exe文件，适用于将Python程序分享给没有安装Python解释器用户。下面由我带大家了解一下py2exe的使用。</p>
+<h2
+id="日更新推荐使用pyinstaller">3.26日更新：推荐使用pyinstaller！！！</h2>
+<p>这两天笔者又发现了另一个python包，叫做pyinstaller，真的超好用。</p>
+<p>安装：<code>pip install pyinstaller</code></p>
+<p>使用：<code>pyinstaller --onefile main.py</code></p>
+<p>众所周知，py2exe打包的程序需要带着<code>dist</code>文件夹一起执行，而pyinstaller直接提供了<code>--onefile</code>这一选项！打包后，<code>dist</code>文件夹里的exe可以单独使用，其余的文件可以直接删除！</p>
+<p>而且，pyinstaller不需要编写<code>setup.py</code>，只需1个命令就可以搞定。</p>
+<p>它的缺点是不能打包更复杂的程序，比如我曾经写的外星人游戏。但是新手时期的控制台程序完全可以用它搞定。</p>
+<h2 id="一-安装py2exe">一、 安装py2exe</h2>
+<ol type="1">
+<li>使用Win+R快捷键打开运行窗口，输入cmd，回车。</li>
+</ol>
+<p><img
+src="https://www.freeimg.cn/i/2025/01/11/6782535014509.webp" /></p>
+<ol type="1">
+<li><p>检查Python和pip版本（版本可能与我的不同，只要不报错就可以）</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">C:\Users\yixun&gt;python --version</span><br><span class="line">Python 3.10.5</span><br><span class="line"></span><br><span class="line">C:\Users\yixun&gt;pip --version</span><br><span class="line">pip 22.0.4 from C:\Users\yixun\AppData\Local\Programs\Python\Python310\lib\site-packages\pip (python 3.10)</span><br></pre></td></tr></table></figure></li>
+<li><p>安装py2exe：<code>pip install py2exe</code></p></li>
+</ol>
+<h2 id="二使用py2exe">二、使用py2exe</h2>
+<ol type="1">
+<li><p>首先将cmd切换到你的文件夹里，比如<code>cd C:\Users\yixun\Desktop\Code</code>。安装了Windows终端的读者也可以在文件夹里右击，然后这样：</p>
+<p><img
+src="https://www.freeimg.cn/i/2025/01/11/6782535087359.webp" /></p></li>
+<li><p>创建一个测试用的Python程序，比如经典的废话程序“身高计算器”：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&quot;你的身高是：&quot;</span> + <span class="built_in">input</span>(<span class="string">&quot;请输入你的身高：&quot;</span>))</span><br><span class="line"><span class="built_in">input</span>()   <span class="comment">#防止输出太快窗口直接关闭，建议每个要转成exe的程序都添加这一句话</span></span><br></pre></td></tr></table></figure>
+<p>可以命名为<code>main.py</code></p></li>
+<li><p>接下来，创建一个新的Python程序，可以命名为<code>setup.py</code></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> distutils.core <span class="keyword">import</span> setup</span><br><span class="line"><span class="keyword">import</span> py2exe</span><br><span class="line"></span><br><span class="line">sys.argv.append(<span class="string">&#x27;py2exe&#x27;</span>)</span><br><span class="line">setup(console=[<span class="string">&quot;main.py&quot;</span>]) <span class="comment"># 与你的程序文件名匹配</span></span><br></pre></td></tr></table></figure>
+<p>注意，所有命名都不是强制性的，可以随意更改。</p></li>
+<li><p>双击运行<code>setup.py</code></p></li>
+<li><p>这会生成一个名叫<code>dist</code>的子目录，注意如果要把exe分享给别人，dist目录要一起分享。</p></li>
+<li><p>打开dist目录中的main.exe，成功运行，最后按Enter可以退出程序。</p></li>
+</ol>
+<blockquote>
+<p>如有疑问，请联系yixun2010@outlook.com</p>
+</blockquote>
+<hr />
+<p>The END</p>
+]]></content>
+      <tags>
+        <tag>计算机工具</tag>
+        <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Linux配置oh-my-zsh的步骤</title>
+    <url>/2022/11/20/demo/</url>
+    <content><![CDATA[<h2 id="安装zshoh-my-zsh">1. 安装zsh，oh-my-zsh</h2>
+<ul>
+<li><p>首先安装zsh：<code>sudo apt install zsh</code></p></li>
+<li><p>然后安装oh-my-zsh：<code>sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"</code></p></li>
+</ul>
+<h2 id="安装插件">2. 安装插件</h2>
+<ul>
+<li><p>安装高亮插件：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/.oh-my-zsh/custom/plugins/</span><br><span class="line">git <span class="built_in">clone</span> https://github.com/zsh-users/zsh-syntax-highlighting.git</span><br></pre></td></tr></table></figure></li>
+<li><p>安装主题插件：<code>git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $&#123;ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom&#125;/themes/powerlevel10k</code></p></li>
+<li><p>将设置应用到.zshrc：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">### ................ ###</span></span><br><span class="line">ZSH_THEME=<span class="string">&quot;powerlevel10k/powerlevel10k&quot;</span></span><br><span class="line"><span class="comment">### ................ ###</span></span><br><span class="line">plugins = (git <span class="built_in">sudo</span> zsh-syntax-highlighting)</span><br><span class="line"><span class="comment">### ................ ###</span></span><br><span class="line"><span class="built_in">source</span> ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh</span><br></pre></td></tr></table></figure></li>
+</ul>
+]]></content>
+      <tags>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>【模板】后缀数组（仅代码）</title>
     <url>/2025/01/16/%E3%80%90%E6%A8%A1%E6%9D%BF%E3%80%91%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84%EF%BC%88%E4%BB%85%E4%BB%A3%E7%A0%81%EF%BC%89/</url>
     <content><![CDATA[<h2 id="定义">1.定义</h2>
@@ -324,6 +374,16 @@ class="math inline">\(h_{rk_i} \ge h_{rk_{i-1}}-1\)</span>）</p>
 <h2 id="代码">2.代码</h2>
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">1e6</span> + <span class="number">5</span>, M = <span class="number">200</span>;</span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line"><span class="type">char</span> a[N];</span><br><span class="line"><span class="type">int</span> sa[N*<span class="number">2</span>], rk[N*<span class="number">2</span>], rk0[N*<span class="number">2</span>], cnt[M], id[N*<span class="number">2</span>], h[N*<span class="number">2</span>];</span><br><span class="line"><span class="type">int</span> pos = <span class="number">0</span>, ans = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">    cin.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    cin.<span class="built_in">getline</span>(a<span class="number">+1</span>, N);</span><br><span class="line">    n = <span class="built_in">strlen</span>(a<span class="number">+1</span>);</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> m = <span class="number">128</span>, i;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        cnt[rk[i] = a[i]]++;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= m; i++)</span><br><span class="line">        cnt[i] += cnt[i - <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">for</span> (i = n; i &gt;= <span class="number">1</span>; i--)</span><br><span class="line">        sa[cnt[rk[i]]--] = i;</span><br><span class="line">    <span class="type">int</span> p = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> len = <span class="number">1</span>; p &lt; n; len *= <span class="number">2</span>, m = p) &#123;</span><br><span class="line">        p = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (i = n - len + <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">            id[p++] = i;</span><br><span class="line">        <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">            <span class="keyword">if</span> (sa[i] &gt; len)</span><br><span class="line">                id[p++] = sa[i] - len;</span><br><span class="line">        <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt;= m; i++)</span><br><span class="line">            cnt[i] = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">            cnt[rk[i]]++;</span><br><span class="line">        <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= m; i++)</span><br><span class="line">            cnt[i] += cnt[i - <span class="number">1</span>];</span><br><span class="line">        <span class="keyword">for</span> (i = n; i &gt;= <span class="number">1</span>; i--)</span><br><span class="line">            sa[cnt[rk[id[i]]]--] = id[i];</span><br><span class="line">        <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt;= n; i++)</span><br><span class="line">            rk0[i] = rk[i];</span><br><span class="line">        p = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (rk0[sa[i]] == rk0[sa[i - <span class="number">1</span>]] &amp;&amp; rk0[sa[i] + len] == rk0[sa[i - <span class="number">1</span>] + len])</span><br><span class="line">                rk[sa[i]] = p;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                rk[sa[i]] = ++p;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>, k = <span class="number">0</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (k) k--;</span><br><span class="line">        <span class="keyword">while</span> (a[i+k] == a[sa[rk[i]<span class="number">-1</span>]+k]) k++;</span><br><span class="line">        h[rk[i]] = k;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        cout &lt;&lt; sa[i] &lt;&lt; <span class="string">&#x27; &#x27;</span>;</span><br><span class="line">    cout &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        cout &lt;&lt; h[i] &lt;&lt; <span class="string">&#x27; &#x27;</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>字符串下标从 <span class="math inline">\(1\)</span> 开始。</p>
+]]></content>
+      <tags>
+        <tag>OI</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>一个网络流模版（支持最大流和费用流）</title>
+    <url>/2025/03/07/%E4%B8%80%E4%B8%AA%E7%BD%91%E7%BB%9C%E6%B5%81%E6%A8%A1%E7%89%88%EF%BC%88%E6%94%AF%E6%8C%81%E6%9C%80%E5%A4%A7%E6%B5%81%E5%92%8C%E8%B4%B9%E7%94%A8%E6%B5%81%EF%BC%89/</url>
+    <content><![CDATA[<h2 id="代码">代码：</h2>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="type">int</span> N, <span class="keyword">typename</span> T = <span class="type">int</span>&gt;</span><br><span class="line"><span class="keyword">struct</span> Graph &#123;</span><br><span class="line">    <span class="keyword">struct</span> Edge &#123;</span><br><span class="line">        <span class="type">int</span> v, rev;</span><br><span class="line">        T c, w;</span><br><span class="line">    &#125;;</span><br><span class="line">    array&lt;vector&lt;Edge&gt;, N&gt; gh;</span><br><span class="line">    array&lt;<span class="type">int</span>, N&gt; d, cur;</span><br><span class="line">    array&lt;T, N&gt; dis;</span><br><span class="line">    bitset&lt;N&gt; vis;</span><br><span class="line">    T inf = <span class="built_in">numeric_limits</span>&lt;T&gt;().<span class="built_in">max</span>(), Ans = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">add</span><span class="params">(<span class="type">int</span> u, <span class="type">int</span> v, T c, T w = <span class="number">0</span>)</span> </span>&#123;</span><br><span class="line">        gh[u].<span class="built_in">push_back</span>(&#123;v, (<span class="type">int</span>)gh[v].<span class="built_in">size</span>(), c, w&#125;);</span><br><span class="line">        gh[v].<span class="built_in">push_back</span>(&#123;u, (<span class="type">int</span>)gh[u].<span class="built_in">size</span>()<span class="number">-1</span>, <span class="number">0</span>, -w&#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">bfs</span><span class="params">(<span class="type">int</span> s, <span class="type">int</span> t)</span> </span>&#123;</span><br><span class="line">        d.<span class="built_in">fill</span>(<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">for</span> (T&amp; i : dis) i = inf;</span><br><span class="line">        d[s] = <span class="number">1</span>, dis[s] = <span class="number">0</span>;</span><br><span class="line">        queue&lt;<span class="type">int</span>&gt; q;</span><br><span class="line">        q.<span class="built_in">push</span>(s);</span><br><span class="line">        vis = <span class="number">0</span>;</span><br><span class="line">        vis[s] = <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">while</span> (!q.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">            <span class="type">int</span> u = q.<span class="built_in">front</span>();</span><br><span class="line">            q.<span class="built_in">pop</span>();</span><br><span class="line">            vis[u] = <span class="literal">false</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">auto</span> e : gh[u]) &#123;</span><br><span class="line">                <span class="keyword">if</span> (dis[u] + e.w &lt; dis[e.v] &amp;&amp; e.c) &#123;</span><br><span class="line">                    d[e.v] = d[u] + <span class="number">1</span>, dis[e.v] = dis[u] + e.w;</span><br><span class="line">                    <span class="keyword">if</span> (!vis[e.v]) q.<span class="built_in">push</span>(e.v), vis[e.v] = <span class="literal">true</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dis[t] != inf;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">T <span class="title">dfs</span><span class="params">(<span class="type">int</span> u, <span class="type">int</span> t, T fl)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (u == t || !fl) <span class="keyword">return</span> fl;</span><br><span class="line">        T ret = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span>&amp; i = cur[u]; i &lt; gh[u].<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            Edge&amp; e = gh[u][i];</span><br><span class="line">            <span class="keyword">if</span> (d[e.v] == d[u] + <span class="number">1</span> &amp;&amp; e.c &gt; <span class="number">0</span> &amp;&amp; dis[e.v] == dis[u] + e.w) &#123;</span><br><span class="line">                T f = <span class="built_in">dfs</span>(e.v, t, <span class="built_in">min</span>(fl, e.c));</span><br><span class="line">                <span class="keyword">if</span> (f &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                    e.c -= f;</span><br><span class="line">                    gh[e.v][e.rev].c += f;</span><br><span class="line">                    ret += f;</span><br><span class="line">                    fl -= f;</span><br><span class="line">                    Ans += f * e.w;</span><br><span class="line">                    <span class="keyword">if</span> (!fl) <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">pair&lt;T, T&gt; <span class="title">max_flow</span><span class="params">(<span class="type">int</span> s, <span class="type">int</span> t)</span> </span>&#123;</span><br><span class="line">        T ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (<span class="built_in">bfs</span>(s, t)) &#123;</span><br><span class="line">            cur.<span class="built_in">fill</span>(<span class="number">0</span>);</span><br><span class="line">            T x;</span><br><span class="line">            <span class="keyword">while</span> ((x = <span class="built_in">dfs</span>(s, t, inf)))</span><br><span class="line">                ans += x;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> &#123;ans, Ans&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <tags>
         <tag>OI</tag>
@@ -361,66 +421,6 @@ class="math inline">\(s\)</span> 中最长回文串的长度。</p>
 <h3 id="代码-2">代码：</h3>
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> n = s.<span class="built_in">size</span>();</span><br><span class="line"><span class="type">int</span> len = <span class="number">0</span>, nl = <span class="number">0</span>, nr = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>, l = <span class="number">0</span>, r = <span class="number">-1</span>; i &lt; n; i++) &#123;</span><br><span class="line">	<span class="type">int</span> k = (i&gt;r) ? <span class="number">1</span> : <span class="built_in">min</span>(d1[l+r-i], r-i<span class="number">+1</span>);</span><br><span class="line">	<span class="keyword">while</span> (<span class="number">0</span>&lt;=i-k &amp;&amp; i+k&lt;n &amp;&amp; s[i-k]==s[i+k]) k++;</span><br><span class="line">	d1[i] = k--;</span><br><span class="line">	<span class="keyword">if</span> (i+k&gt;r)</span><br><span class="line">		l = i-k, r = i+k;</span><br><span class="line">	<span class="keyword">if</span> (r-l<span class="number">+1</span> &gt; len)</span><br><span class="line">		len = r-l<span class="number">+1</span>, nl = l, nr = r;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>, l = <span class="number">0</span>, r = <span class="number">-1</span>; i &lt; n; i++) &#123;</span><br><span class="line">  	<span class="type">int</span> k = (i&gt;r) ? <span class="number">0</span> : <span class="built_in">min</span>(d2[l+r-i<span class="number">+1</span>], r-i<span class="number">+1</span>);</span><br><span class="line">  	<span class="keyword">while</span> (<span class="number">0</span>&lt;=i-k<span class="number">-1</span> &amp;&amp; i+k&lt;n &amp;&amp; s[i-k<span class="number">-1</span>]==s[i+k])k++;</span><br><span class="line">  	d2[i] = k--;</span><br><span class="line">  	<span class="keyword">if</span> (i+k&gt;r)</span><br><span class="line">   		l = i-k<span class="number">-1</span>, r = i+k;</span><br><span class="line">   	<span class="keyword">if</span> (r-l<span class="number">+1</span> &gt; len)</span><br><span class="line">   		len = r-l<span class="number">+1</span>, nl = l, nr = r;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>字符串下标从 <span class="math inline">\(0\)</span> 开始。</p>
-]]></content>
-      <tags>
-        <tag>OI</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>一个网络流模版（支持最大流和费用流）</title>
-    <url>/2025/03/07/%E4%B8%80%E4%B8%AA%E7%BD%91%E7%BB%9C%E6%B5%81%E6%A8%A1%E7%89%88%EF%BC%88%E6%94%AF%E6%8C%81%E6%9C%80%E5%A4%A7%E6%B5%81%E5%92%8C%E8%B4%B9%E7%94%A8%E6%B5%81%EF%BC%89/</url>
-    <content><![CDATA[<h2 id="代码">代码：</h2>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="type">int</span> N, <span class="keyword">typename</span> T = <span class="type">int</span>&gt;</span><br><span class="line"><span class="keyword">struct</span> Graph &#123;</span><br><span class="line">    <span class="keyword">struct</span> Edge &#123;</span><br><span class="line">        <span class="type">int</span> v, rev;</span><br><span class="line">        T c, w;</span><br><span class="line">    &#125;;</span><br><span class="line">    array&lt;vector&lt;Edge&gt;, N&gt; gh;</span><br><span class="line">    array&lt;<span class="type">int</span>, N&gt; d, cur;</span><br><span class="line">    array&lt;T, N&gt; dis;</span><br><span class="line">    bitset&lt;N&gt; vis;</span><br><span class="line">    T inf = <span class="built_in">numeric_limits</span>&lt;T&gt;().<span class="built_in">max</span>(), Ans = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">add</span><span class="params">(<span class="type">int</span> u, <span class="type">int</span> v, T c, T w = <span class="number">0</span>)</span> </span>&#123;</span><br><span class="line">        gh[u].<span class="built_in">push_back</span>(&#123;v, (<span class="type">int</span>)gh[v].<span class="built_in">size</span>(), c, w&#125;);</span><br><span class="line">        gh[v].<span class="built_in">push_back</span>(&#123;u, (<span class="type">int</span>)gh[u].<span class="built_in">size</span>()<span class="number">-1</span>, <span class="number">0</span>, -w&#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">bfs</span><span class="params">(<span class="type">int</span> s, <span class="type">int</span> t)</span> </span>&#123;</span><br><span class="line">        d.<span class="built_in">fill</span>(<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">for</span> (T&amp; i : dis) i = inf;</span><br><span class="line">        d[s] = <span class="number">1</span>, dis[s] = <span class="number">0</span>;</span><br><span class="line">        queue&lt;<span class="type">int</span>&gt; q;</span><br><span class="line">        q.<span class="built_in">push</span>(s);</span><br><span class="line">        vis = <span class="number">0</span>;</span><br><span class="line">        vis[s] = <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">while</span> (!q.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">            <span class="type">int</span> u = q.<span class="built_in">front</span>();</span><br><span class="line">            q.<span class="built_in">pop</span>();</span><br><span class="line">            vis[u] = <span class="literal">false</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">auto</span> e : gh[u]) &#123;</span><br><span class="line">                <span class="keyword">if</span> (dis[u] + e.w &lt; dis[e.v] &amp;&amp; e.c) &#123;</span><br><span class="line">                    d[e.v] = d[u] + <span class="number">1</span>, dis[e.v] = dis[u] + e.w;</span><br><span class="line">                    <span class="keyword">if</span> (!vis[e.v]) q.<span class="built_in">push</span>(e.v), vis[e.v] = <span class="literal">true</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dis[t] != inf;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">T <span class="title">dfs</span><span class="params">(<span class="type">int</span> u, <span class="type">int</span> t, T fl)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (u == t || !fl) <span class="keyword">return</span> fl;</span><br><span class="line">        T ret = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span>&amp; i = cur[u]; i &lt; gh[u].<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            Edge&amp; e = gh[u][i];</span><br><span class="line">            <span class="keyword">if</span> (d[e.v] == d[u] + <span class="number">1</span> &amp;&amp; e.c &gt; <span class="number">0</span> &amp;&amp; dis[e.v] == dis[u] + e.w) &#123;</span><br><span class="line">                T f = <span class="built_in">dfs</span>(e.v, t, <span class="built_in">min</span>(fl, e.c));</span><br><span class="line">                <span class="keyword">if</span> (f &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                    e.c -= f;</span><br><span class="line">                    gh[e.v][e.rev].c += f;</span><br><span class="line">                    ret += f;</span><br><span class="line">                    fl -= f;</span><br><span class="line">                    Ans += f * e.w;</span><br><span class="line">                    <span class="keyword">if</span> (!fl) <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">pair&lt;T, T&gt; <span class="title">max_flow</span><span class="params">(<span class="type">int</span> s, <span class="type">int</span> t)</span> </span>&#123;</span><br><span class="line">        T ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (<span class="built_in">bfs</span>(s, t)) &#123;</span><br><span class="line">            cur.<span class="built_in">fill</span>(<span class="number">0</span>);</span><br><span class="line">            T x;</span><br><span class="line">            <span class="keyword">while</span> ((x = <span class="built_in">dfs</span>(s, t, inf)))</span><br><span class="line">                ans += x;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> &#123;ans, Ans&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <tags>
-        <tag>OI</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>LibreOJ #6439. Popcount Xor</title>
-    <url>/2025/08/10/LibreOJ-6439-Popcount-Xor/</url>
-    <content><![CDATA[<h2 id="题目描述">1. 题目描述</h2>
-<p>给定正整数 <span
-class="math inline">\(n\)</span>，用<strong>二进制整数</strong>表示，求
-<span class="math inline">\(\bigoplus_{i=0}^{n-1}
-\operatorname{popcount}(i)\)</span>。保证 <span class="math inline">\(1
-\le n \le 2^{3\times10^5}\)</span>。</p>
-<h2 id="思路">2. 思路</h2>
-<p>令 <span class="math inline">\(s\)</span> 为输入的字符串，下标从
-<span class="math inline">\(0\)</span> 开始。枚举每个 <span
-class="math inline">\(s_i = 1\)</span> 的 <span
-class="math inline">\(i\)</span>，考虑第 <span class="math inline">\(0
-\sim i-1\)</span> 位已确定，第 <span class="math inline">\(i\)</span>
-位为 <span class="math inline">\(0\)</span> 时对答案的贡献 <span
-class="math inline">\(c\)</span>。则： <span class="math display">\[
-c = \bigoplus_{j=0}^{|s|-i+1} (cnt_{i-1}+j)\binom{|s|-i+1}{j} \bmod 2
-\]</span> 其中 <span class="math inline">\(cnt_i\)</span> 表示从 <span
-class="math inline">\(s_0\)</span> 到 <span
-class="math inline">\(s_i\)</span> 中 <span
-class="math inline">\(1\)</span> 的数量。<span
-class="math inline">\(\binom{|s|-i+1}{j}\)</span> 是从后面的 <span
-class="math inline">\(|s|-i+1\)</span> 位中选 <span
-class="math inline">\(j\)</span> 位的方案数。模 <span
-class="math inline">\(2\)</span> 是因为同一个数异或自己偶数次结果为
-<span class="math inline">\(0\)</span>。</p>
-<p>由Lucas定理，<span class="math inline">\(\binom{n}{m} \bmod 2 =
-\binom{n\bmod2}{m\bmod2}
-\binom{\lfloor\frac{n}{2}\rfloor}{\lfloor\frac{m}{2}\rfloor} \bmod
-2\)</span>，不断将 <span class="math inline">\(n, m\)</span>
-一起右移一位，可得 <span class="math inline">\(\binom{n}{m} \bmod 2 =
-\prod_i \binom{n&gt;&gt;i \&amp; 1}{m &gt;&gt; i \&amp;
-1}\)</span>。</p>
-<p>又由于 <span
-class="math inline">\(\binom{1}{1}=\binom{1}{0}=\binom{0}{0} =
-1,\binom{0}{1} = 0\)</span>，我们发现： <span class="math display">\[
-\binom n m \bmod 2 = [n \&amp; m = m]
-\]</span> 所以： <span class="math display">\[
-c = \bigoplus_{j=0}^{|s|-i+1} (cnt_{i-1}+j)[(|s|-i+1) \&amp; j = j]
-\]</span> 算这个式子的复杂度可以接受。</p>
-<h2 id="代码">3. 代码</h2>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    string s;</span><br><span class="line">    cin &gt;&gt; s;</span><br><span class="line">    <span class="type">int</span> n = s.<span class="built_in">size</span>(), cnt = <span class="number">0</span>, ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (s[i] == <span class="string">&#x27;0&#x27;</span>) <span class="keyword">continue</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = n-i<span class="number">-1</span>; ; j = (j<span class="number">-1</span>)&amp;(n-i<span class="number">-1</span>)) &#123;</span><br><span class="line">            ans ^= (cnt+j);</span><br><span class="line">            <span class="keyword">if</span> (!j) <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        cnt++;</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; ans &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<hr />
-<p>The End</p>
 ]]></content>
       <tags>
         <tag>OI</tag>
