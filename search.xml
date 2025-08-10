@@ -376,4 +376,54 @@ class="math inline">\(s\)</span> 中最长回文串的长度。</p>
         <tag>OI</tag>
       </tags>
   </entry>
+  <entry>
+    <title>LibreOJ #6439. Popcount Xor</title>
+    <url>/2025/08/10/LibreOJ-6439-Popcount-Xor/</url>
+    <content><![CDATA[<h2 id="题目描述">1. 题目描述</h2>
+<p>给定正整数 <span
+class="math inline">\(n\)</span>，用<strong>二进制整数</strong>表示，求
+<span class="math inline">\(\bigoplus_{i=0}^{n-1}
+\operatorname{popcount}(i)\)</span>。保证 <span class="math inline">\(1
+\le n \le 2^{3\times10^5}\)</span>。</p>
+<h2 id="思路">2. 思路</h2>
+<p>令 <span class="math inline">\(s\)</span> 为输入的字符串，下标从
+<span class="math inline">\(0\)</span> 开始。枚举每个 <span
+class="math inline">\(s_i = 1\)</span> 的 <span
+class="math inline">\(i\)</span>，考虑第 <span class="math inline">\(0
+\sim i-1\)</span> 位已确定，第 <span class="math inline">\(i\)</span>
+位为 <span class="math inline">\(0\)</span> 时对答案的贡献 <span
+class="math inline">\(c\)</span>。则： <span class="math display">\[
+c = \bigoplus_{j=0}^{|s|-i+1} (cnt_{i-1}+j)\binom{|s|-i+1}{j} \bmod 2
+\]</span> 其中 <span class="math inline">\(cnt_i\)</span> 表示从 <span
+class="math inline">\(s_0\)</span> 到 <span
+class="math inline">\(s_i\)</span> 中 <span
+class="math inline">\(1\)</span> 的数量。<span
+class="math inline">\(\binom{|s|-i+1}{j}\)</span> 是从后面的 <span
+class="math inline">\(|s|-i+1\)</span> 位中选 <span
+class="math inline">\(j\)</span> 位的方案数。模 <span
+class="math inline">\(2\)</span> 是因为同一个数异或自己偶数次结果为
+<span class="math inline">\(0\)</span>。</p>
+<p>由Lucas定理，<span class="math inline">\(\binom{n}{m} \bmod 2 =
+\binom{n\bmod2}{m\bmod2}
+\binom{\lfloor\frac{n}{2}\rfloor}{\lfloor\frac{m}{2}\rfloor} \bmod
+2\)</span>，不断将 <span class="math inline">\(n, m\)</span>
+一起右移一位，可得 <span class="math inline">\(\binom{n}{m} \bmod 2 =
+\prod_i \binom{n&gt;&gt;i \&amp; 1}{m &gt;&gt; i \&amp;
+1}\)</span>。</p>
+<p>又由于 <span
+class="math inline">\(\binom{1}{1}=\binom{1}{0}=\binom{0}{0} =
+1,\binom{0}{1} = 0\)</span>，我们发现： <span class="math display">\[
+\binom n m \bmod 2 = [n \&amp; m = m]
+\]</span> 所以： <span class="math display">\[
+c = \bigoplus_{j=0}^{|s|-i+1} (cnt_{i-1}+j)[(|s|-i+1) \&amp; j = j]
+\]</span> 算这个式子的复杂度可以接受。</p>
+<h2 id="代码">3. 代码</h2>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    string s;</span><br><span class="line">    cin &gt;&gt; s;</span><br><span class="line">    <span class="type">int</span> n = s.<span class="built_in">size</span>(), cnt = <span class="number">0</span>, ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (s[i] == <span class="string">&#x27;0&#x27;</span>) <span class="keyword">continue</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = n-i<span class="number">-1</span>; ; j = (j<span class="number">-1</span>)&amp;(n-i<span class="number">-1</span>)) &#123;</span><br><span class="line">            ans ^= (cnt+j);</span><br><span class="line">            <span class="keyword">if</span> (!j) <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        cnt++;</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; ans &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr />
+<p>The End</p>
+]]></content>
+      <tags>
+        <tag>OI</tag>
+      </tags>
+  </entry>
 </search>

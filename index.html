@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width">
-<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
@@ -148,7 +148,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-count">11</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -171,6 +171,117 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/08/10/LibreOJ-6439-Popcount-Xor/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yixun Zhang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="索思乐学">
+      <meta itemprop="description" content="编程技术分享">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 索思乐学">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/08/10/LibreOJ-6439-Popcount-Xor/" class="post-title-link" itemprop="url">LibreOJ #6439. Popcount Xor</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2025-08-10 10:15:45 / 修改时间：10:16:28" itemprop="dateCreated datePublished" datetime="2025-08-10T10:15:45+08:00">2025-08-10</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="题目描述">1. 题目描述</h2>
+<p>给定正整数 <span
+class="math inline">\(n\)</span>，用<strong>二进制整数</strong>表示，求
+<span class="math inline">\(\bigoplus_{i=0}^{n-1}
+\operatorname{popcount}(i)\)</span>。保证 <span class="math inline">\(1
+\le n \le 2^{3\times10^5}\)</span>。</p>
+<h2 id="思路">2. 思路</h2>
+<p>令 <span class="math inline">\(s\)</span> 为输入的字符串，下标从
+<span class="math inline">\(0\)</span> 开始。枚举每个 <span
+class="math inline">\(s_i = 1\)</span> 的 <span
+class="math inline">\(i\)</span>，考虑第 <span class="math inline">\(0
+\sim i-1\)</span> 位已确定，第 <span class="math inline">\(i\)</span>
+位为 <span class="math inline">\(0\)</span> 时对答案的贡献 <span
+class="math inline">\(c\)</span>。则： <span class="math display">\[
+c = \bigoplus_{j=0}^{|s|-i+1} (cnt_{i-1}+j)\binom{|s|-i+1}{j} \bmod 2
+\]</span> 其中 <span class="math inline">\(cnt_i\)</span> 表示从 <span
+class="math inline">\(s_0\)</span> 到 <span
+class="math inline">\(s_i\)</span> 中 <span
+class="math inline">\(1\)</span> 的数量。<span
+class="math inline">\(\binom{|s|-i+1}{j}\)</span> 是从后面的 <span
+class="math inline">\(|s|-i+1\)</span> 位中选 <span
+class="math inline">\(j\)</span> 位的方案数。模 <span
+class="math inline">\(2\)</span> 是因为同一个数异或自己偶数次结果为
+<span class="math inline">\(0\)</span>。</p>
+<p>由Lucas定理，<span class="math inline">\(\binom{n}{m} \bmod 2 =
+\binom{n\bmod2}{m\bmod2}
+\binom{\lfloor\frac{n}{2}\rfloor}{\lfloor\frac{m}{2}\rfloor} \bmod
+2\)</span>，不断将 <span class="math inline">\(n, m\)</span>
+一起右移一位，可得 <span class="math inline">\(\binom{n}{m} \bmod 2 =
+\prod_i \binom{n&gt;&gt;i \&amp; 1}{m &gt;&gt; i \&amp;
+1}\)</span>。</p>
+<p>又由于 <span
+class="math inline">\(\binom{1}{1}=\binom{1}{0}=\binom{0}{0} =
+1,\binom{0}{1} = 0\)</span>，我们发现： <span class="math display">\[
+\binom n m \bmod 2 = [n \&amp; m = m]
+\]</span> 所以： <span class="math display">\[
+c = \bigoplus_{j=0}^{|s|-i+1} (cnt_{i-1}+j)[(|s|-i+1) \&amp; j = j]
+\]</span> 算这个式子的复杂度可以接受。</p>
+<h2 id="代码">3. 代码</h2>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    string s;</span><br><span class="line">    cin &gt;&gt; s;</span><br><span class="line">    <span class="type">int</span> n = s.<span class="built_in">size</span>(), cnt = <span class="number">0</span>, ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (s[i] == <span class="string">&#x27;0&#x27;</span>) <span class="keyword">continue</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = n-i<span class="number">-1</span>; ; j = (j<span class="number">-1</span>)&amp;(n-i<span class="number">-1</span>)) &#123;</span><br><span class="line">            ans ^= (cnt+j);</span><br><span class="line">            <span class="keyword">if</span> (!j) <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        cnt++;</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; ans &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr />
+<p>The End</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1099,94 +1210,9 @@ src="https://www.freeimg.cn/i/2025/01/11/6782535087359.webp" /></p></li>
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/11/20/demo/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yixun Zhang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="索思乐学">
-      <meta itemprop="description" content="编程技术分享">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 索思乐学">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/11/20/demo/" class="post-title-link" itemprop="url">Linux配置oh-my-zsh的步骤</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-11-20 11:10:46" itemprop="dateCreated datePublished" datetime="2022-11-20T11:10:46+08:00">2022-11-20</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-05-28 11:20:28" itemprop="dateModified" datetime="2023-05-28T11:20:28+08:00">2023-05-28</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="安装zshoh-my-zsh">1. 安装zsh，oh-my-zsh</h2>
-<ul>
-<li><p>首先安装zsh：<code>sudo apt install zsh</code></p></li>
-<li><p>然后安装oh-my-zsh：<code>sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"</code></p></li>
-</ul>
-<h2 id="安装插件">2. 安装插件</h2>
-<ul>
-<li><p>安装高亮插件：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/.oh-my-zsh/custom/plugins/</span><br><span class="line">git <span class="built_in">clone</span> https://github.com/zsh-users/zsh-syntax-highlighting.git</span><br></pre></td></tr></table></figure></li>
-<li><p>安装主题插件：<code>git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $&#123;ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom&#125;/themes/powerlevel10k</code></p></li>
-<li><p>将设置应用到.zshrc：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">### ................ ###</span></span><br><span class="line">ZSH_THEME=<span class="string">&quot;powerlevel10k/powerlevel10k&quot;</span></span><br><span class="line"><span class="comment">### ................ ###</span></span><br><span class="line">plugins = (git <span class="built_in">sudo</span> zsh-syntax-highlighting)</span><br><span class="line"><span class="comment">### ................ ###</span></span><br><span class="line"><span class="built_in">source</span> ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh</span><br></pre></td></tr></table></figure></li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+  </nav>
 
 </div>
   </main>
