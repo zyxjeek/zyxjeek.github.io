@@ -148,7 +148,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-count">14</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -171,6 +171,124 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/08/13/P12124-%E8%93%9D%E6%A1%A5%E6%9D%AF-2024-%E7%9C%81-B-%E7%AC%AC%E4%BA%8C%E5%9C%BA-%E5%89%8D%E7%BC%80%E6%80%BB%E5%88%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yixun Zhang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="索思乐学">
+      <meta itemprop="description" content="编程技术分享">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 索思乐学">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/08/13/P12124-%E8%93%9D%E6%A1%A5%E6%9D%AF-2024-%E7%9C%81-B-%E7%AC%AC%E4%BA%8C%E5%9C%BA-%E5%89%8D%E7%BC%80%E6%80%BB%E5%88%86/" class="post-title-link" itemprop="url">P12124 [蓝桥杯 2024 省 B 第二场] 前缀总分</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2025-08-13 10:46:42 / 修改时间：11:18:46" itemprop="dateCreated datePublished" datetime="2025-08-13T10:46:42+08:00">2025-08-13</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="题意简述">题意简述</h2>
+<p>给定 <span class="math inline">\(n\)</span> 个字符串 <span
+class="math inline">\(s_{1 \sim n}\)</span> ，修改某字符串的某个字符，使
+<span class="math inline">\(\sum_{i&lt;j}
+\operatorname{LCP}(s_i,s_j)\)</span> 最大。<span
+class="math inline">\(\operatorname{LCP}(p, q)\)</span> 为字符串 <span
+class="math inline">\(p, q\)</span> 的最长公共前缀长度。</p>
+<h2 id="思路">思路</h2>
+<p>考虑 dp。定义 <span class="math inline">\(f_{i, j, k}\)</span> 表示
+<span class="math inline">\(s_i\)</span> 和 <span
+class="math inline">\(s_j\)</span> 从第 <span
+class="math inline">\(k\)</span>
+位开始到结尾的子串的最长公共前缀长度。</p>
+<p>状态转移： <span class="math display">\[
+f_{i, j, k} =
+\begin{cases}
+0, &amp; s_{i, k} \neq s_{j, k}\\
+f_{i, j, k+1} + 1, &amp; s_{i, k} = s_{j, k}
+\end{cases}
+\]</span> 统计答案时，我们枚举要修改的字符串编号 <span
+class="math inline">\(i\)</span>，修改字符的下标 <span
+class="math inline">\(k\)</span> 和修改后的字符 <span
+class="math inline">\(c\)</span>。记这次修改可以使答案增加 <span
+class="math inline">\(d\)</span>。对于所有 <span class="math inline">\(j
+\neq i\)</span>，有以下两种情况使答案变动：</p>
+<ul>
+<li><p>如果 <span class="math inline">\(f_{i, j, 1} = k-1\)</span> 且
+<span class="math inline">\(c = s_{j,k}\)</span>，这说明原本 <span
+class="math inline">\(s_i\)</span> 和 <span
+class="math inline">\(s_j\)</span> 相等的部分在第 <span
+class="math inline">\(k\)</span>
+位这里断开了，修改之后可以给它接上。<span class="math inline">\(d \gets
+d + f_{i,j,k+1}+1\)</span>。</p></li>
+<li><p>如果 <span class="math inline">\(f_{i,j,1} \ge k\)</span> 且
+<span class="math inline">\(c \neq s_{j,k}\)</span>，这说明原本 <span
+class="math inline">\(s_i\)</span> 和 <span
+class="math inline">\(s_j\)</span>
+有一个较长的最长公共前缀，我们这次修改给它破坏了。<span
+class="math inline">\(d \gets d - (f_{i,j,1}-k+1)\)</span>。</p></li>
+</ul>
+<p>记原本不加修改的答案为 <span class="math inline">\(ans\)</span>。则
+<span class="math inline">\(ans + \max\{d\}\)</span>
+即为最终答案。时间复杂度 <span class="math inline">\(\mathcal
+O(n^2|s_i||\sum|)\)</span>，其中 <span class="math inline">\(|\sum| =
+26\)</span>。</p>
+<h2 id="代码">代码</h2>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> ll;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">205</span>;</span><br><span class="line">string s[N];</span><br><span class="line"><span class="type">int</span> f[N][N][N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">    cin.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> n;</span><br><span class="line">    cin &gt;&gt; n;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        cin &gt;&gt; s[i];</span><br><span class="line">        s[i] = <span class="string">&quot; &quot;</span> + s[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt;= n; j++)</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> k = <span class="built_in">min</span>(s[i].<span class="built_in">size</span>(), s[j].<span class="built_in">size</span>())<span class="number">-1</span>; k &gt;= <span class="number">1</span>; k--)</span><br><span class="line">                <span class="keyword">if</span> (s[i][k] == s[j][k])</span><br><span class="line">                    f[i][j][k] = f[i][j][k<span class="number">+1</span>] + <span class="number">1</span>;</span><br><span class="line">    <span class="type">int</span> ans0 = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = i<span class="number">+1</span>; j &lt;= n; j++)</span><br><span class="line">            ans0 += f[i][j][<span class="number">1</span>];</span><br><span class="line">    <span class="type">int</span> ans = ans0;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> k = <span class="number">1</span>; k &lt; s[i].<span class="built_in">size</span>(); k++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">char</span> c = <span class="string">&#x27;a&#x27;</span>; c &lt;= <span class="string">&#x27;z&#x27;</span>; c++) &#123;</span><br><span class="line">                <span class="type">int</span> add = <span class="number">0</span>;</span><br><span class="line">                <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt;= n; j++) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (j == i || k &gt;= s[j].<span class="built_in">size</span>()) <span class="keyword">continue</span>;</span><br><span class="line">                    <span class="keyword">if</span> (f[i][j][<span class="number">1</span>] == k<span class="number">-1</span> &amp;&amp; c == s[j][k])</span><br><span class="line">                        add += f[i][j][k<span class="number">+1</span>]<span class="number">+1</span>;</span><br><span class="line">                    <span class="keyword">if</span> (f[i][j][<span class="number">1</span>] &gt;= k &amp;&amp; c != s[j][k])</span><br><span class="line">                        add -= f[i][j][<span class="number">1</span>]-k<span class="number">+1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                ans = <span class="built_in">max</span>(ans, ans0+add);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; ans &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr />
+<p>The End</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1078,120 +1196,6 @@ class="math inline">\(x\)</span> 的数字位数。</p></li>
 A_i)\)</span></p>
 <hr />
 <p>The End</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/01/01/P2021-faebdc%E7%8E%A9%E6%89%91%E5%85%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yixun Zhang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="索思乐学">
-      <meta itemprop="description" content="编程技术分享">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 索思乐学">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/01/01/P2021-faebdc%E7%8E%A9%E6%89%91%E5%85%8B/" class="post-title-link" itemprop="url">P2021 faebdc玩扑克</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-01-01 12:28:16" itemprop="dateCreated datePublished" datetime="2024-01-01T12:28:16+08:00">2024-01-01</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-01-11 19:21:06" itemprop="dateModified" datetime="2025-01-11T19:21:06+08:00">2025-01-11</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="题目描述">1. 题目描述</h2>
-<blockquote>
-<p>zky 有 <span class="math inline">\(n\)</span> 个扑克牌，编号从 <span
-class="math inline">\(1\)</span> 到 <span
-class="math inline">\(n\)</span>，zky
-把它排成一个序列，每次把最上方的扑克牌放在牌堆底，然后把下一张扑克牌拿出来输出，最终输出的序列恰好是从
-<span class="math inline">\(1\)</span> 到 <span
-class="math inline">\(n\)</span>，faebdc 问你原序列是什么，因为 faebdc
-神犇早已在 <span class="math inline">\(\mathcal O (1)\)</span>
-的时间得出结果，如果你在 1 s 内答不出来，faebdc 会吃了你。 对于 <span
-class="math inline">\(100\%\)</span> 的数据，<span
-class="math inline">\(1 \le n \le {10}^6\)</span>。</p>
-<p>原题链接：<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2021"
-class="uri">https://www.luogu.com.cn/problem/P2021</a></p>
-</blockquote>
-<h2 id="思路">2. 思路</h2>
-<p>此题的数据范围为 <span
-class="math inline">\(10^6\)</span>，所以应该用 <span
-class="math inline">\(\mathcal O(n)\)</span>
-级别的算法来解决。一开始比较容易想到的是使用数学方法进行推导，但是似乎有点复杂。考虑使用队列进行模拟，队列中储存的是答案在数组中的<strong>下标</strong>，每次输出就将数组中对应下标的答案设为当前应输出的数字（1~n）。这样即可解决问题。</p>
-<p>建立一个数组 <span
-class="math inline">\(C\)</span>，表示整个扑克牌序列，一个队列 <span
-class="math inline">\(Q\)</span>，用于模拟整个过程，其中每个成员 <span
-class="math inline">\(i\)</span> 表示第 <span
-class="math inline">\(i\)</span> 张扑克牌。将 <span
-class="math inline">\(cnt\)</span> 初始赋值为 <span
-class="math inline">\(1\)</span>。循环直到队列为空，每一次都将队首置于队尾，并取出第二个队首
-<span class="math inline">\(k\)</span>，将 <span
-class="math inline">\(C_k\)</span> 设为 <span
-class="math inline">\(cnt\)</span>，且递增 <span
-class="math inline">\(cnt\)</span>。循环结束后顺次输出数组 <span
-class="math inline">\(C\)</span> 即可。</p>
-<h2 id="代码">3. 代码</h2>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line"><span class="type">int</span> c[<span class="number">1000005</span>];</span><br><span class="line">queue&lt;<span class="type">int</span>&gt; q;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    cin &gt;&gt; n;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        q.<span class="built_in">push</span>(i);</span><br><span class="line">    <span class="type">int</span> cnt = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (!q.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">        q.<span class="built_in">push</span>(q.<span class="built_in">front</span>());</span><br><span class="line">        q.<span class="built_in">pop</span>();</span><br><span class="line">        c[q.<span class="built_in">front</span>()] = cnt++;</span><br><span class="line">        q.<span class="built_in">pop</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        cout &lt;&lt; c[i] &lt;&lt; <span class="string">&#x27; &#x27;</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h2 id="复杂度分析">4. 复杂度分析</h2>
-<p>时间复杂度：<span class="math inline">\(\mathcal O(n)\)</span></p>
-<p>空间复杂度：<span class="math inline">\(\mathcal O(n)\)</span></p>
-<hr />
-<p>The END</p>
 
       
     </div>
